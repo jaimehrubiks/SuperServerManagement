@@ -1,9 +1,10 @@
 package messages;
+import java.io.Serializable;
 import java.util.Date;
 
 import db.DBConnector;
 
-public class Message implements Loggable{
+public class Message implements Loggable, Serializable{
 	
 	private Date date;
 	private int minionId;
