@@ -6,13 +6,13 @@
     <position height="52" width="114" x="169" y="-14"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="2" language="java" name="User" project="ClusterManagement" file="/ClusterManagement/src/User" 
+  <package id="2" language="java" name="user" project="ClusterManagement" file="/ClusterManagement/src/user" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="52" width="114" x="460" y="-14"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="3" language="java" name="Master.MasterOptions" project="ClusterManagement" 
-    file="/ClusterManagement/src/Master/MasterOptions.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="master.MasterOptions" project="ClusterManagement" 
+    file="/ClusterManagement/src/master/MasterOptions.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="123" x="913" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -29,8 +29,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="Messages.CmdQuery" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/CmdQuery.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="messages.CmdQuery" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/CmdQuery.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="97" x="1601" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -38,8 +38,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="Minion.TCPMinionClient" project="ClusterManagement" 
-    file="/ClusterManagement/src/Minion/TCPMinionClient.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="minion.TCPMinionClient" project="ClusterManagement" 
+    file="/ClusterManagement/src/minion/TCPMinionClient.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="137" width="136" x="1263" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -47,8 +47,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="Messages.ExtraInfo" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/ExtraInfo.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="messages.ExtraInfo" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/ExtraInfo.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="137" width="154" x="1925" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -56,8 +56,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="Master.TCPListener" project="ClusterManagement" 
-    file="/ClusterManagement/src/Master/TCPListener.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="master.TCPListener" project="ClusterManagement" 
+    file="/ClusterManagement/src/master/TCPListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="101" width="147" x="1076" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -65,8 +65,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="User.TCPUserClient" project="ClusterManagement" 
-    file="/ClusterManagement/src/User/TCPUserClient.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="user.TCPUserClient" project="ClusterManagement" 
+    file="/ClusterManagement/src/user/TCPUserClient.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="155" width="180" x="213" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -74,13 +74,13 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="10" language="java" name="Messages" project="ClusterManagement" file="/ClusterManagement/src/Messages" 
+  <package id="10" language="java" name="messages" project="ClusterManagement" file="/ClusterManagement/src/messages" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="52" width="114" x="614" y="-14"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="11" language="java" name="User.User" project="ClusterManagement" 
-    file="/ClusterManagement/src/User/User.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="11" language="java" name="user.User" project="ClusterManagement" 
+    file="/ClusterManagement/src/user/User.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="97" x="323" y="-14"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -88,8 +88,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="Messages.CmdAnswers" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/CmdAnswers.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="12" language="java" name="messages.CmdAnswers" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/CmdAnswers.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="137" width="147" x="1738" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -97,8 +97,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="Messages.MinionInfo" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/MinionInfo.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="13" language="java" name="messages.MinionInfo" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/MinionInfo.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="137" width="154" x="2119" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -106,8 +106,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="Master.Master" project="ClusterManagement" 
-    file="/ClusterManagement/src/Master/Master.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="14" language="java" name="master.Master" project="ClusterManagement" 
+    file="/ClusterManagement/src/master/Master.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="97" x="1076" y="-14"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -115,8 +115,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="15" language="java" name="Messages.Loggable" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/Loggable.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="15" language="java" name="messages.Loggable" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/Loggable.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="193" x="2507" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -124,8 +124,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="16" language="java" name="Messages.MinionGatherable" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/MinionGatherable.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="16" language="java" name="messages.MinionGatherable" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/MinionGatherable.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="154" x="2119" y="520"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -133,8 +133,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="17" language="java" name="Minion.Minion" project="ClusterManagement" 
-    file="/ClusterManagement/src/Minion/Minion.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="17" language="java" name="minion.Minion" project="ClusterManagement" 
+    file="/ClusterManagement/src/minion/Minion.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="97" x="1351" y="-14"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -142,8 +142,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="Messages.ExtraInfoType" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/ExtraInfoType.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="18" language="java" name="messages.ExtraInfoType" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/ExtraInfoType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="117" x="1925" y="520"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -151,8 +151,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="Messages.CmdType" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/CmdType.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="19" language="java" name="messages.CmdType" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/CmdType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="97" x="1670" y="520"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -160,8 +160,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="Messages.MessageType" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/MessageType.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="20" language="java" name="messages.MessageType" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/MessageType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="115" x="2740" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -169,8 +169,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="Messages.BasicInfo" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/BasicInfo.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="21" language="java" name="messages.BasicInfo" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/BasicInfo.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="155" width="154" x="2313" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -178,7 +178,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="User.GUI" project="ClusterManagement" file="/ClusterManagement/src/User/GUI.java" 
+  <class id="22" language="java" name="user.GUI" project="ClusterManagement" file="/ClusterManagement/src/user/GUI.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="97" x="433" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -187,18 +187,18 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="23" language="java" name="Master" project="ClusterManagement" file="/ClusterManagement/src/Master" 
+  <package id="23" language="java" name="master" project="ClusterManagement" file="/ClusterManagement/src/master" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="52" width="114" x="768" y="-14"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="24" language="java" name="Minion" project="ClusterManagement" file="/ClusterManagement/src/Minion" 
+  <package id="24" language="java" name="minion" project="ClusterManagement" file="/ClusterManagement/src/minion" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="52" width="114" x="922" y="-14"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="25" language="java" name="Master.TCPClientListener" project="ClusterManagement" 
-    file="/ClusterManagement/src/Master/TCPClientListener.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="25" language="java" name="master.TCPClientListener" project="ClusterManagement" 
+    file="/ClusterManagement/src/master/TCPClientListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="101" width="147" x="1076" y="520"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -206,8 +206,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="26" language="java" name="Minion.MinionStorage" project="ClusterManagement" 
-    file="/ClusterManagement/src/Minion/MinionStorage.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="26" language="java" name="minion.MinionStorage" project="ClusterManagement" 
+    file="/ClusterManagement/src/minion/MinionStorage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="83" width="122" x="1439" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -215,8 +215,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="27" language="java" name="Master.TCPMinionListener" project="ClusterManagement" 
-    file="/ClusterManagement/src/Master/TCPMinionListener.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="27" language="java" name="master.TCPMinionListener" project="ClusterManagement" 
+    file="/ClusterManagement/src/master/TCPMinionListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="101" width="152" x="1263" y="520"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -224,8 +224,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="Messages.Message" project="ClusterManagement" 
-    file="/ClusterManagement/src/Messages/Message.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="28" language="java" name="messages.Message" project="ClusterManagement" 
+    file="/ClusterManagement/src/messages/Message.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="299" width="199" x="2119" y="-14"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -233,136 +233,180 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="29">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="30" name="ms"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="32">    
+  <realization id="29">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="16"/>  
   </realization>  
-  <association id="33">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="34" name="msgType"/>      
-      <multiplicity id="35" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="36">    
-    <end type="SOURCE" refId="27"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <generalization id="37">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <association id="38">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="39" name="db"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="41">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <realization id="42">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <generalization id="43">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <generalization id="44">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <association id="45">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="46" name="mo"/>      
-      <multiplicity id="47" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="48">    
+  <association id="30">    
     <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="49" name="tcpuc"/>      
-      <multiplicity id="50" minimum="0" maximum="1"/>    
+      <attribute id="31" name="tcpuc">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="52" name="cmdtype"/>      
-      <multiplicity id="53" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="19" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="55" name="ET"/>      
-      <multiplicity id="56" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="57">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="16"/>  
-  </realization>  
-  <realization id="58">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="16"/>  
-  </realization>  
-  <association id="59">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="60" name="tcplistener"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="62">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <generalization id="63">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <association id="64">    
+  <association id="33">    
     <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="65" name="gui"/>      
-      <multiplicity id="66" minimum="0" maximum="1"/>    
+      <attribute id="34" name="gui">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="67">    
+  <association id="36">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="37" name="mo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="39">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <generalization id="40">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <association id="42">    
     <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="68" name="tcpmc"/>      
-      <multiplicity id="69" minimum="0" maximum="1"/>    
+      <attribute id="43" name="ms">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="46" name="tcplistener">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <association id="49">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="50" name="cmdtype">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="53" name="ET">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="55">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <association id="56">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="57" name="tcpmc">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="70">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="71" name="cmdtype"/>      
-      <multiplicity id="72" minimum="0" maximum="1"/>    
+  <generalization id="59">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <realization id="60">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <generalization id="61">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="62">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="63" name="msgType">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="64" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="65">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <realization id="66">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <association id="67">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="68" name="cmdtype">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="71" name="db">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="72" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
