@@ -9,7 +9,13 @@ public class Message implements Loggable, Serializable{
 	private Date date;
 	private int minionId;
 	private String minionCode;
-	private MessageType msgType;
+
+	protected MessageType msgType;
+	
+	public Message() {
+		date = new Date();
+		msgType = MessageType.MESSAGE;
+	}
 	
 	@Override
 	public void toDatabase(DBConnector db){
