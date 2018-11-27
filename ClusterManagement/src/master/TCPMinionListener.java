@@ -9,22 +9,25 @@ import network.TCPSocket;
 
 public class TCPMinionListener extends TCPSocket {
 
-	private static final int port = 8001;
+	public final static int port = 8001;
 
-	public TCPMinionListener(Socket socket) throws ConnectionException {
+	//public TCPClientListener() throws ConnectionException {
+		//super(port);
+	//}
+	
+	public TCPMinionListener(Socket socket) {
 		super(socket);
 	}
 
 //	@Override
-//	public Message receiveMessage() {
+//	public Message receiveMessage() throws Exception {
+//		Message m = null;
 //		try {
-//			Message m = (Message) rxBuffer.readObject();
-//			System.out.println("Message received: " + m.toString());
+//			m = (Message) rxBuffer.readObject();
+//			return m;
 //		} catch (ClassNotFoundException | IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
+//			throw e;
 //		}
-//		return null;
 //	}
 
 }
