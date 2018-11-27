@@ -7,9 +7,9 @@ import db.DBConnector;
 public class Message implements Loggable, Serializable{
 	
 	private Date date;
-	private int minionId;
 	private String minionCode;
 
+	protected int minionId;
 	protected MessageType msgType;
 	
 	public Message() {
