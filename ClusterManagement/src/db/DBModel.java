@@ -38,6 +38,36 @@ public class DBModel {
 		
 		return minionId;
 	}
+	
+	public boolean minionLogin(int id, String code) {
+		
+		boolean result = false;
+		
+		try {
+			Connection con = dbcon.connect();
+			PreparedStatement ps = con.prepareStatement("SELECT (minionId) FROM " + this.databaseName + "WHERE minionID=(?) AND minionCode=(?)");
+			ps.setInt(1, id);
+			ps.setString(2, code);
+			ResultSet rs = ps.executeQuery();
+
+			int res = 0;
+			if (rs.next()) {
+				res = rs.getInt(1);
+			}
+			
+			if(res == id) {
+				result = true;
+			}
+
+			con.close();
+			
+		} catch (SQLException se) {
+			System.out.println("> Error inserting records: " + se.getMessage());
+		}
+		
+		return result;
+
+	}
 
 }
 
