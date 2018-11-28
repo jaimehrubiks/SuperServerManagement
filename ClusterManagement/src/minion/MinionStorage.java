@@ -40,6 +40,16 @@ public class MinionStorage {
         return pw;
     }
     
+    public void deleteSettings() {
+        try(PrintWriter pw = openWxStreams() ){
+            
+        	pw.println("");
+            
+        }catch(IOException e){
+            System.out.println(e.toString());
+        }
+    }
+    
     public void readSettings(){
     	ArrayList<String> settings = new ArrayList<>();
     	String tmp;
@@ -52,6 +62,7 @@ public class MinionStorage {
             if(settings.size() == 2) {
             	minionId = Integer.parseInt(settings.get(0));
             	minionCode = settings.get(1);
+            	isRegistered = true;
             }else {
             	System.out.println("Minion is not registered.");
             	isRegistered = false;
@@ -59,6 +70,7 @@ public class MinionStorage {
                 
         }catch(IOException e){
             System.out.println(e.toString());
+            isRegistered = false;
 			System.out.println("Minion is not registered.");
         }
     	
