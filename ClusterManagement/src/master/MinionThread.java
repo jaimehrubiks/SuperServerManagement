@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import db.DBModel;
 import messages.Message;
 import messages.MessageType;
 import messages.MinionRegister;
@@ -17,7 +18,9 @@ public class MinionThread implements Runnable {
 	private static final int port = 8001;
 
 	private TCPMinionListener socket;
+	private DBModel db;
 	private int mode;
+	private boolean working = false;
 
 	public MinionThread() {
 		this.mode = listener;
@@ -26,6 +29,7 @@ public class MinionThread implements Runnable {
 	public MinionThread(Socket accept) {
 		this.mode = worker;
 		socket = new TCPMinionListener(accept);
+		db = new DBModel("superservermanagement");
 	}
 
 	@Override
@@ -69,26 +73,54 @@ public class MinionThread implements Runnable {
 			minionLogin(message);
 		}
 		
+		// TODO: EN LOS DEMÁS, HAY QUE ELIMINAR EL MINION CODE ANTES DE DEVOLVER EL MENSAJE AL USER
+		
 	
 	}
 	
 	private void minionRegister(MinionRegister message) {
 		// crear random
-		String pwd = String.valueOf(Math.random());
+		String minionCode = String.valueOf(Math.random());
 		// insertar en la base de datos un minion y recoger el id (primary auto increment)
-		int id = 3; // TODO cambiar
+		int minionId = db.newMinion(minionCode);
 		// insertar en el mensaje la password
-		message.setMinionId(id);
-		message.setMinionCode(pwd);
+		if(minionId > 0) {
+			message.setMinionId(minionId);
+			message.setMinionCode(minionCode);
+			message.setCorrect(true);
+		} // If < 0 something wrong happened. correct bit will be false
 		// devolver el mensaje
 		socket.sendMessage(message);
 	}
 	
 	private void minionLogin(MinionLogin message) {
-		// comprobar en la base de datos (where id = y where password =
-		message.setOk(true);
-		// y si está mal message.setOk(false);
+		boolean ok = db.minionLogin(message.getMinionId(), message.getMinionCode());
+		message.setOk(ok);
 		socket.sendMessage(message);
+		if(ok) {
+			Master.connectedMinions.put(message.getMinionId(), this);
+			working();
+		}
+	}
+	
+	private void working() {
+		working = true;
+		// Sleeping until some event happens (like finishing this thread)
+		while(working) {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		// Alternatively, we could just empty this method, and delete this thread, as it is not
+		//  necessary for the minion (in that case we would need to change "this" by other object, in minionLogin method)
+		
+	}
+	
+	public TCPMinionListener getTCP() {
+		return socket;
 	}
 	
 }
