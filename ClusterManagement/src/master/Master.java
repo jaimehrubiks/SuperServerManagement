@@ -17,6 +17,7 @@ public class Master {
 	public Master() {
 		connectedMinions = new HashMap<>();
 		launchClientThread();
+		launchMinionThread();
 	}
 
 	public void launchClientThread() {
@@ -24,6 +25,10 @@ public class Master {
         t.start();
 	}
 	
+	public void launchMinionThread() {
+        Thread t = new Thread(new MinionThread());
+        t.start();
+	}
 	
 
 }

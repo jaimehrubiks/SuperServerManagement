@@ -1,6 +1,7 @@
 package app;
 
 import master.Master;
+import minion.Minion;
 import user.User;
 
 public class Init {
@@ -28,7 +29,8 @@ public class Init {
 				break;
 			case MINION:
 				System.out.println("[Init] Running in Minion mode");
-				System.out.println("[Init] Not implemented");
+				Minion minion = new Minion();
+				break;
 		}
 	}
 
