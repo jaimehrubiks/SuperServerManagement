@@ -16,6 +16,7 @@ public class UserQueryMinionBasicInfo extends Message implements Serializable, M
 	private String publicIP;
 	private String hostName;
 	private String tag;
+	private boolean online;
 	
 	public UserQueryMinionBasicInfo(int id) {
 		this.msgType = MessageType.USER_QUERY_BASICINFO;
@@ -62,6 +63,27 @@ public class UserQueryMinionBasicInfo extends Message implements Serializable, M
 	public void setPublicIP(String publicIP) {
 		this.publicIP = publicIP;
 	}
+
+	/**
+	 * @return the online
+	 */
+	public boolean isOnline() {
+		return online;
+	}
+
+	/**
+	 * @param online the online to set
+	 */
+	public void setOnline(boolean online) {
+		this.online = online;
+	}
 	
+	
+	@Override
+	public String toString() {
+		String s = String.format("> Online: %b\n> Tag: %s\n> Hostname: %s\n> Public IP: %s\n> private IP: %s\n> CPU: %s\n> RAM: %s\n",
+				online, tag, hostName, publicIP, IP, CPU, RAM);
+		return super.toString()+s;
+	}
 
 }

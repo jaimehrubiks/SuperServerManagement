@@ -71,6 +71,7 @@ public class ClientThread implements Runnable {
 				queryMinionList((UserQueryMinionList) m);
 				break;
 			case USER_QUERY_BASICINFO:
+				queryMinionBasicInfo((UserQueryMinionBasicInfo) m);
 				break;
 			default:
 				break;
@@ -90,14 +91,33 @@ public class ClientThread implements Runnable {
 		socket.sendMessage(m);
 	}
 	
-	private void queryMinionBasicInfo(UserQueryBasicInfo m) {
+	private void queryMinionBasicInfo(UserQueryMinionBasicInfo m) {
+		System.out.println("A user has requested queryBasicMinionInfo.");
 		// Check if minion is connected
 		//	> Check if it is in the HashMap
 		//	> Try to connect
+		TCPMinionListener minionTCP;
+		if(Master.connectedMinions.containsKey(m.getMinionId())) {
+			System.out.println("Minion is online.");
+			minionTCP = Master.connectedMinions.get(m.getMinionId()).getTCP();
+		}else { return; }  // Aqui no debería volver.
 		
 		// If connected
 		// > Send message to the minion using its socket.
 		// > Specify bit to 'online'
+		System.out.println("Sending message to minion.");
+		minionTCP.sendMessage(m);
+		// Wait for the response
+		System.out.println("Waiting for the minion's response.");
+		Message ans = minionTCP.receiveMessage();
+		if(ans.getMsgType() == MessageType.USER_QUERY_BASICINFO) {
+			System.out.println("Message received from minion.");
+			m = (UserQueryMinionBasicInfo) ans;
+			m.setOnline(true);
+			System.out.println("Sending response back to the user.");
+			socket.sendMessage(m);
+		}else { return; }
+
 		
 		// If not connected
 		// > Get backup info from database.

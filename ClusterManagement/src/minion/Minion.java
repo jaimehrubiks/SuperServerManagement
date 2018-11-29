@@ -32,18 +32,18 @@ public class Minion {
 			System.out.println("Failed. Trying to start over.");
 			retry();
 		} else {
-			System.out.println("Minion connected. Minion ID="+ms.getMinionId()+" Minion PWD="+ms.getMinionCode());
+			System.out.println("Minion connected. Waiting for messages. Minion ID="+ms.getMinionId()+" Minion PWD="+ms.getMinionCode());
 			workingState();
 		}
 	}
 
 	private void workingState() {
-		socket.receiveMessage();
 		// spawn thread with the received message;
 		boolean listening = true;
 
 		while (listening) {
-			Thread t = new Thread(new MinionWorker(socket.receiveMessage()));
+			Thread t = new Thread(new MinionWorker(socket.receiveMessage(), socket));
+			System.out.println("* Message Received. Spawning thread to process it.");
 			t.start();
 		}
 

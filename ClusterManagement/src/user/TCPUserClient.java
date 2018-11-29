@@ -27,6 +27,7 @@ public class TCPUserClient extends TCPSocket{
 	public void cmd(CmdType cmdt, int minionId) {
 		
 	}
+	
 
 //	@Override
 //	public Message receiveMessage() throws Exception {

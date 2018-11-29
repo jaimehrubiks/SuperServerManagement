@@ -8,7 +8,7 @@ public class UserQueryMinionList extends Message implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	//TODO: DATOS PARA METER MINIONS, de momento:
-	ArrayList minionList;
+	ArrayList<Integer> minionList;
 	
 	public UserQueryMinionList() {
 		this.msgType = MessageType.USER_QUERY_MINIONLIST;
@@ -17,6 +17,10 @@ public class UserQueryMinionList extends Message implements Serializable{
 	
 	public void setMinionList(ArrayList minionList) {
 		this.minionList = minionList;
+	}
+	
+	public ArrayList<Integer> getMinionList(){
+		return minionList;
 	}
 	
 	@Override

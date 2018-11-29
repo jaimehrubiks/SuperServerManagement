@@ -1,29 +1,39 @@
 package minion;
 
 import messages.Message;
+import messages.UserQueryMinionBasicInfo;
 
 public class MinionWorker implements Runnable {
 	
 	private Message msg;
+	private TCPMinionClient socket;
 
-	public MinionWorker(Message receiveMessage) {
+	public MinionWorker(Message receiveMessage, TCPMinionClient socket) {
+		System.out.println("Thread object is spawned. Now it should run().");
+		this.socket = socket;
 		msg = receiveMessage;
 	}
 
 	@Override
 	public void run() {
 		
-		System.out.println("Working on a received message.");
-		// check message type
-		// cast message
-		// do operations (usually, it will be just a call to msg.gatherInformation()), it can also be nothing (ex. keep alive/echo)
-		// send message back
-		// nothing (let this thread die)
-		System.out.println("Ending job.");
+		System.out.println("A message has been received.");
 		
+		switch(msg.getMsgType()) {
+			case USER_QUERY_BASICINFO:
+				UserQueryMinionBasicInfo m = (UserQueryMinionBasicInfo) msg;
+				System.out.println("> Minion has been requested UserQueryMinionBasicInfo");
+				m.gatherInformation();
+				System.out.println("> Sending response back.");
+				socket.sendMessage(m);
+				break;
+			default:
+				System.out.println("Unknown message received.");
+				break;
+		}
 		
-		// de momento implementar un if para userqueryminionbasicinfo, y para keepalive
-
+		System.out.println("> Ending job");
+		
 	}
 
 }
