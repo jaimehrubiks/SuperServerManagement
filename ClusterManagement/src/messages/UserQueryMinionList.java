@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class UserQueryMinionList extends Message implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	//TODO: DATOS PARA METER MINIONS, de momento:
 	ArrayList minionList;
 	

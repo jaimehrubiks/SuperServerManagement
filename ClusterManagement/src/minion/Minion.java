@@ -26,10 +26,13 @@ public class Minion {
 	}
 
 	private void start() {
+		System.out.println("Minion started.");
 		connect();
 		if (status != MinionInfo.Status.LOGGEDIN) {
+			System.out.println("Failed. Trying to start over.");
 			retry();
 		} else {
+			System.out.println("Minion connected. Minion ID="+ms.getMinionId()+" Minion PWD="+ms.getMinionCode());
 			workingState();
 		}
 	}
@@ -54,16 +57,24 @@ public class Minion {
 			socket.closeConnection();
 			return;
 		}
+		System.out.println("Minion connected to server.");
 
 		ms.readSettings();
 		if (!ms.isRegistered()) {
+			System.out.println("Minion storage file does not exist (or is invalid). Trying to register.");
 			status = MinionInfo.Status.UNREGISTERED;
 			register();
 			if (!ms.isRegistered()) {
+				System.out.println("Minion tried to register, but failed.");
 				ms.deleteSettings();
+				socket.closeConnection();
 				return;
 			}
+			System.out.println("Minion registered correctly. Restarting.");
+			socket.closeConnection();
+			return;
 		} else {
+			System.out.println("Minion storage file found. Trying to login with these credentials.");
 			status = MinionInfo.Status.REGISTERED;
 		}
 
@@ -73,11 +84,18 @@ public class Minion {
 
 	private void login() {
 		MinionLogin login = new MinionLogin();
+		login.setMinionId(ms.getMinionId());
+		login.setMinionCode(ms.getMinionCode());
+		System.out.println("Sending login message to server");
+		System.out.println(login.toString());
 		socket.sendMessage(login);
+		System.out.println("Login message sent. Waiting for response.");
 		Message res = socket.receiveMessage();
+		System.out.println("> Got answer.");
 		if (res.getMsgType() == MessageType.MINION_LOGIN) {
 			MinionLogin ans = (MinionLogin) res;
 			if (ans.isOk()) {
+				System.out.println("Authentication Success. Minion logged in correctly.");
 				status = MinionInfo.Status.LOGGEDIN;
 				return;
 			} else {
@@ -91,10 +109,13 @@ public class Minion {
 	private void register() {
 		MinionRegister message = new MinionRegister();
 		socket.sendMessage(message);
+		System.out.println("Sending register message to server.");
 		Message res = socket.receiveMessage();
+		System.out.println("> Got answer");
 		if (res.getMsgType() == MessageType.MINION_REGISTER) {
 			MinionRegister ans = (MinionRegister) res;
 			if (ans.isCorrect()) {
+				System.out.println("Registration message is correct. Saving auth data.");
 				ms.setMinionId(ans.getMinionId());
 				ms.setMinionCode(ans.getMinionCode());
 				ms.setRegistered(true);
@@ -109,7 +130,7 @@ public class Minion {
 	private void retry() {
 		try {
 			Thread.sleep(retryTime);
-			connect();
+			start();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

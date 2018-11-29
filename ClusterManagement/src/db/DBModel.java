@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBModel {
 
@@ -21,7 +22,7 @@ public class DBModel {
 
 		try {
 			Connection con = dbcon.connect();
-			PreparedStatement ps = con.prepareStatement("INSERT INTO " + this.databaseName + "(minionCode) VALUES(?)");
+			PreparedStatement ps = con.prepareStatement("INSERT INTO " + this.databaseName + "(minionCode) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, code);
 			ps.executeUpdate();
 
@@ -33,6 +34,7 @@ public class DBModel {
 			con.close();
 			
 		} catch (SQLException se) {
+			se.printStackTrace();
 			System.out.println("> Error inserting records: " + se.getMessage());
 		}
 		
@@ -45,7 +47,7 @@ public class DBModel {
 		
 		try {
 			Connection con = dbcon.connect();
-			PreparedStatement ps = con.prepareStatement("SELECT (minionId) FROM " + this.databaseName + "WHERE minionID=(?) AND minionCode=(?)");
+			PreparedStatement ps = con.prepareStatement("SELECT (minionId) FROM " + this.databaseName + " WHERE minionID=(?) AND minionCode=(?)");
 			ps.setInt(1, id);
 			ps.setString(2, code);
 			ResultSet rs = ps.executeQuery();

@@ -6,6 +6,8 @@ import db.DBConnector;
 
 public class Message implements Loggable, Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	private Date date;
 	private String minionCode;
 
@@ -52,6 +54,13 @@ public class Message implements Loggable, Serializable{
 
 	public void setMsgType(MessageType msgType) {
 		this.msgType = msgType;
+	}
+	
+	@Override
+	public String toString() {
+		String s = String.format("Message\n--------\nDate: %s\nMessage Type: %s\nMinion ID: %s\nMinion PWD: %s\n--------\n", 
+				date, msgType, minionId, minionCode);
+		return s;
 	}
 	
 	

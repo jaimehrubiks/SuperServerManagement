@@ -48,3 +48,4 @@ pom.xml.releaseBackup
 pom.xml.tag
 .settings/org.eclipse.jdt.core.prefs
 ClusterManagement/.settings/org.eclipse.jdt.core.prefs
+ClusterManagement/.classpath

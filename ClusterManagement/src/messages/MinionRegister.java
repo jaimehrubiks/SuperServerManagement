@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 public class MinionRegister extends Message implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
+	
 	private boolean correct = false;
 	
 	public MinionRegister() {
@@ -22,6 +25,11 @@ public class MinionRegister extends Message implements Serializable {
 	 */
 	public void setCorrect(boolean correct) {
 		this.correct = correct;
+	}
+	
+	public String toString() {
+		String s = String.format(">Correct: %b\n", correct);
+		return super.toString()+s;
 	}
 
 }

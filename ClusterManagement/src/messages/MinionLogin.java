@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 public class MinionLogin extends Message implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
+	
 	private boolean ok;
 	
 	public MinionLogin() {
@@ -23,6 +26,11 @@ public class MinionLogin extends Message implements Serializable {
 	 */
 	public void setOk(boolean ok) {
 		this.ok = ok;
+	}
+	
+	public String toString() {
+		String s = String.format(">Ok: %b\n", ok);
+		return super.toString()+s;
 	}
 
 }

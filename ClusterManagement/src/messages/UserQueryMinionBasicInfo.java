@@ -7,6 +7,9 @@ import com.sun.management.OperatingSystemMXBean;
 
 public class UserQueryMinionBasicInfo extends Message implements Serializable, MinionGatherable {
 	
+	private static final long serialVersionUID = 1L;
+
+	
 	private String CPU;
 	private String IP;
 	private String RAM;

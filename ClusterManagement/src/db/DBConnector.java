@@ -10,7 +10,8 @@ import java.sql.SQLException;
 public class DBConnector {
 
 	// Code database URL
-	static final String DB_URL = "jdbc:mysql://127.0.0.1:3307/superservermanagement?autoReconnect=true&useSSL=false";
+	static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/superservermanagement?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
+//	static final String DB_URL = "jdbc:mysql://localhost:330/superservermanagement";//superservermanagement?autoReconnect=true&useSSL=false";
 
 	// Database credentials
 	static final String USER = "itmd510", PASS = "1234";
