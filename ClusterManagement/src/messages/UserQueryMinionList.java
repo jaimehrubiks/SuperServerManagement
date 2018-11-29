@@ -18,5 +18,11 @@ public class UserQueryMinionList extends Message implements Serializable{
 	public void setMinionList(ArrayList minionList) {
 		this.minionList = minionList;
 	}
+	
+	@Override
+	public String toString() {
+		String s = String.format("%s\n",minionList.toString());
+		return super.toString()+s;
+	}
 
 }

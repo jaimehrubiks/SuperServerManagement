@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import db.DBModel;
 import messages.Message;
+import messages.MessageType;
+import messages.UserQueryMinionBasicInfo;
+import messages.UserQueryMinionList;
 
 public class ClientThread implements Runnable {
 
@@ -15,6 +19,7 @@ public class ClientThread implements Runnable {
 
 	private TCPClientListener socket;
 	private int mode;
+	private DBModel db;
 
 	public ClientThread() {
 		this.mode = listener;
@@ -23,6 +28,7 @@ public class ClientThread implements Runnable {
 	public ClientThread(Socket accept) {
 		this.mode = worker;
 		socket = new TCPClientListener(accept);
+		db = new DBModel("minions");
 	}
 
 	@Override
@@ -55,33 +61,46 @@ public class ClientThread implements Runnable {
 
 	public void worker() {
 		
-		boolean listening = true;
+		// Get new message
+		Message m = socket.receiveMessage();
+		System.out.println("User connected.");
 
-		while(listening) {
-			
-			/*
-			 * En realidad, en la del client, no habría un bucle, sólo se hace lo siguiente:
-			 * 1. recibir mensaje
-			 * 2. pedir mensaje al minion
-			 * 3. recibir mensaje
-			 * 4. responder mensaje
-			 * 
-			 * 
-			 */
-			try {
-				System.out.println("Listening for a new message.");
-				Message m = socket.receiveMessage();
-				System.out.println("Got message: " + m.toString());
-				System.out.println(m.getMsgType());
-			} catch (Exception e) {
-				listening = false;
-			}
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		// Check message type and take actions
+		switch(m.getMsgType()) {
+			case USER_QUERY_MINIONLIST:
+				queryMinionList((UserQueryMinionList) m);
+				break;
+			case USER_QUERY_BASICINFO:
+				break;
+			default:
+				break;
 		}
+		
+		// Close connection
+		System.out.println("User disconnects.");
+		socket.closeConnection();
+
+	}
+	
+	private void queryMinionList(UserQueryMinionList m) {
+		System.out.println("> User asking for user minion list");
+		m.setMinionList(db.getMinionList());
+		System.out.println("> Sending this message back:");
+		System.out.println(m.toString());
+		socket.sendMessage(m);
+	}
+	
+	private void queryMinionBasicInfo(UserQueryBasicInfo m) {
+		// Check if minion is connected
+		//	> Check if it is in the HashMap
+		//	> Try to connect
+		
+		// If connected
+		// > Send message to the minion using its socket.
+		// > Specify bit to 'online'
+		
+		// If not connected
+		// > Get backup info from database.
+		// > Specify bit to 'offline'
 	}
 }

@@ -21,7 +21,6 @@ public class Init {
 			case Init.USER:
 				System.out.println("[Init] Running in USER mode");
 				User user = new User();
-				user.Test();
 				break;
 			case MASTER:
 				System.out.println("[Init] Running in MASTER mode.");

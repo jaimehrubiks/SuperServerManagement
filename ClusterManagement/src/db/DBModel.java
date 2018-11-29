@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DBModel {
 
@@ -70,7 +71,26 @@ public class DBModel {
 		return result;
 
 	}
+	
+	public ArrayList<Integer> getMinionList(){
+		
+		try {
+			Connection con = dbcon.connect();
+			String query = "SELECT minionId FROM " + this.databaseName;
+			ResultSet rs = con.createStatement().executeQuery(query);
+			ArrayList<Integer> result = new ArrayList<>();
+			while(rs.next()) {
+				result.add(rs.getInt(1));
+			}
+			con.close();
+			return result;
 
+		}catch(Exception e) {
+			System.out.println(e);
+			return new ArrayList<Integer>();
+		}
+		
+	}
 }
 
 //
