@@ -71,6 +71,18 @@ public class UserQueryMinionBasicInfo extends Message implements Serializable, M
 		return online;
 	}
 
+	public String getHostname() {
+		return hostName;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public String getPublicIP(){
+		return publicIP;
+	}
+	public String getIP() {
+		return IP;
+	}
 	/**
 	 * @param online the online to set
 	 */
