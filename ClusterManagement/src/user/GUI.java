@@ -90,7 +90,7 @@ public void actionPerformed(ActionEvent e) {
 		}
 		for (UserQueryMinionBasicInfo userQueryMinionBasicInfo : query2) {
 			
-			Object[] row= {userQueryMinionBasicInfo.getMinionId(),userQueryMinionBasicInfo.getHostname(),userQueryMinionBasicInfo.getTag(),userQueryMinionBasicInfo.getPublicIP(),userQueryMinionBasicInfo.getIP(),userQueryMinionBasicInfo.getCPULoad(),userQueryMinionBasicInfo.getRAMUsage(),"online",false};
+			Object[] row= {userQueryMinionBasicInfo.getMinionId(),userQueryMinionBasicInfo.getHostname(),userQueryMinionBasicInfo.getTag(),userQueryMinionBasicInfo.getPublicIP(),userQueryMinionBasicInfo.getIP(),userQueryMinionBasicInfo.getCPULoad(),userQueryMinionBasicInfo.getRAM(),userQueryMinionBasicInfo.isOnline(),false};
 				tableModel.removeRow(array2.get(counter));
 				tableModel.insertRow(array2.get(counter), row);
 				counter++;

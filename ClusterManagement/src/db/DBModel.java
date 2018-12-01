@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import messages.UserQueryMinionBasicInfo;
+
 public class DBModel {
 
 	DBConnector dbcon = null;
@@ -90,6 +92,71 @@ public class DBModel {
 			return new ArrayList<Integer>();
 		}
 		
+	}
+	
+	public boolean saveMinionBasicInfo(UserQueryMinionBasicInfo msg) {
+		
+		boolean ok = false;
+
+		try {
+			Connection con = dbcon.connect();
+			PreparedStatement ps = con.prepareStatement("UPDATE " + this.databaseName +
+					" SET ram=?, cpu=?, hostname=?, privateIp=?, publicIP=? WHERE minionId=? AND minionCode=?");
+			ps.setString(1, msg.getRAM());
+			ps.setString(2, msg.getCPULoad());
+			ps.setString(3, msg.getHostname());
+			ps.setString(4, msg.getIP());
+			ps.setString(5, msg.getPublicIP() == null? " " : msg.getPublicIP());
+			ps.setInt(6, msg.getMinionId());
+			ps.setString(7, msg.getMinionCode());
+			int result = ps.executeUpdate();
+			
+			if(result > 0)
+				ok = true;
+
+			con.close();
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			System.out.println("> Error inserting records: " + se.getMessage());
+		}
+		
+		return ok;
+		
+	}
+	
+	public boolean getMinionBasicInfo(UserQueryMinionBasicInfo msg) {
+
+		boolean result = false;
+		
+		try {
+			Connection con = dbcon.connect();
+			String sql ="SELECT ram, cpu, hostname, privateIp, publicIp, tag FROM " 
+					+ this.databaseName + " WHERE minionID=?" ;
+			System.out.println(sql);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, msg.getMinionId());
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = true;
+				msg.setRAM(rs.getString(1));
+				msg.setCPU(rs.getString(2));
+				msg.setHostName(rs.getString(3));
+				msg.setIP(rs.getString(4));
+				msg.setPublicIP(rs.getString(5));
+				msg.setTag(rs.getString(6));
+			}
+			
+			con.close();
+			
+		} catch (SQLException se) {
+			System.out.println("> Error querying basic info records: " + se.getMessage());
+			se.printStackTrace();
+		}
+		
+		return result;
+
 	}
 }
 

@@ -60,29 +60,29 @@ public class ClientThread implements Runnable {
 	}
 
 	public void worker() {
-		
+
 		// Get new message
 		Message m = socket.receiveMessage();
 		System.out.println("User connected.");
 
 		// Check message type and take actions
-		switch(m.getMsgType()) {
-			case USER_QUERY_MINIONLIST:
-				queryMinionList((UserQueryMinionList) m);
-				break;
-			case USER_QUERY_BASICINFO:
-				queryMinionBasicInfo((UserQueryMinionBasicInfo) m);
-				break;
-			default:
-				break;
+		switch (m.getMsgType()) {
+		case USER_QUERY_MINIONLIST:
+			queryMinionList((UserQueryMinionList) m);
+			break;
+		case USER_QUERY_BASICINFO:
+			queryMinionBasicInfo((UserQueryMinionBasicInfo) m);
+			break;
+		default:
+			break;
 		}
-		
+
 		// Close connection
 		System.out.println("User disconnects.");
 		socket.closeConnection();
 
 	}
-	
+
 	private void queryMinionList(UserQueryMinionList m) {
 		System.out.println("> User asking for user minion list");
 		m.setMinionList(db.getMinionList());
@@ -90,18 +90,61 @@ public class ClientThread implements Runnable {
 		System.out.println(m.toString());
 		socket.sendMessage(m);
 	}
-	
+
 	private void queryMinionBasicInfo(UserQueryMinionBasicInfo m) {
+
 		System.out.println("A user has requested queryBasicMinionInfo.");
-		// Check if minion is connected
-		//	> Check if it is in the HashMap
-		//	> Try to connect
+
 		TCPMinionListener minionTCP;
-		if(Master.connectedMinions.containsKey(m.getMinionId())) {
+		if (Master.connectedMinions.containsKey(m.getMinionId())) {
 			System.out.println("Minion is online.");
 			minionTCP = Master.connectedMinions.get(m.getMinionId()).getTCP();
-		}else { return; }  // Aqui no debería volver.
+			System.out.println("Sending message to minion.");
+			minionTCP.sendMessage(m);
+			System.out.println("Waiting for the minion's response.");
+			Message ans = minionTCP.receiveMessage();
+			if (ans.getMsgType() == MessageType.USER_QUERY_BASICINFO) {
+				System.out.println("Message received from minion.");
+				m = (UserQueryMinionBasicInfo) ans;
+				System.out.println(m.toString());
+				m.setPublicIP(minionTCP.getPublicIp());
+				boolean result = db.saveMinionBasicInfo(m);
+				if (result) {
+					System.out.println("Auth OK. Data saved to db.");
+					m.setOnline(true);
+				} else {
+					System.out.println("Auth not OK. Data not saved to db.");
+					m.setOnline(false);
+				}
+			} else {
+				return;
+			}
+		}else {
+			System.out.println("Minion is not online.");
+			m.setOnline(false);
+		}
 		
+		// 
+		boolean exists = db.getMinionBasicInfo(m);
+		if(exists) {
+			socket.sendMessage(m);
+		}
+
+
+	}
+
+	private void queryMinionBasicInfo2(UserQueryMinionBasicInfo m) {
+		// Check if minion is connected
+		// > Check if it is in the HashMap
+		// > Try to connect
+		TCPMinionListener minionTCP;
+		if (Master.connectedMinions.containsKey(m.getMinionId())) {
+			System.out.println("Minion is online.");
+			minionTCP = Master.connectedMinions.get(m.getMinionId()).getTCP();
+		} else {
+			return;
+		} // Aqui no debería volver.
+
 		// If connected
 		// > Send message to the minion using its socket.
 		// > Specify bit to 'online'
@@ -110,15 +153,25 @@ public class ClientThread implements Runnable {
 		// Wait for the response
 		System.out.println("Waiting for the minion's response.");
 		Message ans = minionTCP.receiveMessage();
-		if(ans.getMsgType() == MessageType.USER_QUERY_BASICINFO) {
+		if (ans.getMsgType() == MessageType.USER_QUERY_BASICINFO) {
 			System.out.println("Message received from minion.");
 			m = (UserQueryMinionBasicInfo) ans;
-			m.setOnline(true);
-			System.out.println("Sending response back to the user.");
+			System.out.println(m.toString());
+			boolean result = db.saveMinionBasicInfo(m);
+			if (result) {
+				System.out.println("Auth OK. Data saved to db.");
+				m.setOnline(true);
+				m.setPublicIP(minionTCP.getPublicIp());
+				System.out.println("Sending response back to the user.");
+			} else {
+				System.out.println("Auth not OK.");
+				m.setOnline(false);
+			}
 			socket.sendMessage(m);
-		}else { return; }
+		} else {
+			return;
+		}
 
-		
 		// If not connected
 		// > Get backup info from database.
 		// > Specify bit to 'offline'

@@ -42,7 +42,7 @@ public class Minion {
 		boolean listening = true;
 
 		while (listening) {
-			Thread t = new Thread(new MinionWorker(socket.receiveMessage(), socket));
+			Thread t = new Thread(new MinionWorker(socket.receiveMessage(), socket, ms));
 			System.out.println("* Message Received. Spawning thread to process it.");
 			t.start();
 		}

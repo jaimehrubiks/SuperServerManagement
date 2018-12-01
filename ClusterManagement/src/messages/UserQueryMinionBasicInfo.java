@@ -44,7 +44,7 @@ public class UserQueryMinionBasicInfo extends Message implements Serializable, M
 		return cpu_load;
 	}
 	
-	public String getRAMUsage() {
+	private String getRAMUsage() {
 		
 		OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
 		long RAM_total, RAM_used;
@@ -96,6 +96,62 @@ public class UserQueryMinionBasicInfo extends Message implements Serializable, M
 		String s = String.format("> Online: %b\n> Tag: %s\n> Hostname: %s\n> Public IP: %s\n> private IP: %s\n> CPU: %s\n> RAM: %s\n",
 				online, tag, hostName, publicIP, IP, CPU, RAM);
 		return super.toString()+s;
+	}
+
+	/**
+	 * @return the cPU
+	 */
+	public String getCPU() {
+		return CPU;
+	}
+
+	/**
+	 * @param cPU the cPU to set
+	 */
+	public void setCPU(String cPU) {
+		CPU = cPU;
+	}
+
+	/**
+	 * @return the rAM
+	 */
+	public String getRAM() {
+		return RAM;
+	}
+
+	/**
+	 * @param rAM the rAM to set
+	 */
+	public void setRAM(String rAM) {
+		RAM = rAM;
+	}
+
+	/**
+	 * @return the hostName
+	 */
+	public String getHostName() {
+		return hostName;
+	}
+
+	/**
+	 * @param hostName the hostName to set
+	 */
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
+
+	/**
+	 * @param iP the iP to set
+	 */
+	public void setIP(String iP) {
+		IP = iP;
+	}
+
+	/**
+	 * @param tag the tag to set
+	 */
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 }

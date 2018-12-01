@@ -18,6 +18,10 @@ public class TCPMinionListener extends TCPSocket {
 	public TCPMinionListener(Socket socket) {
 		super(socket);
 	}
+	
+	public String getPublicIp() {
+		return comSocket.getRemoteSocketAddress().toString();
+	}
 
 //	@Override
 //	public Message receiveMessage() throws Exception {
