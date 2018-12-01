@@ -35,7 +35,7 @@ public GUI()
     ask_minion_list.addActionListener(this);
     ask_information.addActionListener(this);
     table=new JTable(tableModel);
-    table.setPreferredScrollableViewportSize(new Dimension(850, 850));
+    table.setPreferredScrollableViewportSize(new Dimension(700, 300));
     table.setFillsViewportHeight(true);
     TableColumn tc=table.getColumnModel().getColumn(8);
     tc.setCellEditor(table.getDefaultEditor(Boolean.class));
@@ -43,7 +43,7 @@ public GUI()
     scrollpane =new JScrollPane(table);
     this.add(scrollpane,BorderLayout.WEST);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1500,1500);
+    this.setSize(750,750);
     /*******************/
     JPanel button_panel=new JPanel();
     button_panel.add(ask_minion_list);
@@ -65,7 +65,8 @@ public void actionPerformed(ActionEvent e) {
 	User user=new User();
 	int counter=0;
 	if (e.getSource()==ask_minion_list) {
-		array=user.getMinionList().getMinionList();
+		deleteTable();
+				array=user.getMinionList().getMinionList();
 		for (Integer integer : array) {
 			Object[] row= {integer,"","","","","","","",false};
 			tableModel.addRow(row);
@@ -94,17 +95,19 @@ public void actionPerformed(ActionEvent e) {
 				tableModel.removeRow(array2.get(counter));
 				tableModel.insertRow(array2.get(counter), row);
 				counter++;
-		}
-		
-		
-		
+		}	
 	 }
 	else {
 		
-	}
-	
-	
+	}	
 }
 
-
+public void deleteTable() {
+	int num_rows=table.getRowCount();
+	System.out.println(num_rows);
+	for (int i = num_rows; i > 0; i--) {
+		tableModel.removeRow(i-1);
+		System.out.println(table.getRowCount());
+	}
+}
 } 
