@@ -3,7 +3,6 @@ package user;
 import errors.ConnectionException;
 import messages.CmdType;
 import messages.ExtraInfoType;
-import messages.Message;
 import network.TCPSocket;
 
 public class TCPUserClient extends TCPSocket{

@@ -1,11 +1,6 @@
 package master;
 
-import java.io.IOException;
-import java.net.ServerSocket;
 import java.util.HashMap;
-
-import master.MasterOptions;
-import network.TCPSocket;
 
 public class Master {
 

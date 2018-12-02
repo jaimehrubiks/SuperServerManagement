@@ -7,8 +7,8 @@ import java.net.Socket;
 import db.DBModel;
 import messages.Message;
 import messages.MessageType;
-import messages.MinionRegister;
 import messages.MinionLogin;
+import messages.MinionRegister;
 
 public class MinionThread implements Runnable {
 
@@ -29,7 +29,7 @@ public class MinionThread implements Runnable {
 	public MinionThread(Socket accept) {
 		this.mode = worker;
 		socket = new TCPMinionListener(accept);
-		db = new DBModel("minions");
+		db = new DBModel("ssm_minions");
 	}
 
 	@Override

@@ -2,8 +2,15 @@ package messages;
 
 import java.io.Serializable;
 import java.lang.management.ManagementFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import com.sun.management.OperatingSystemMXBean;
+
+import db.DBConnector;
 
 public class UserQueryMinionBasicInfo extends Message implements Serializable, MinionGatherable {
 	
@@ -22,6 +29,7 @@ public class UserQueryMinionBasicInfo extends Message implements Serializable, M
 		this.msgType = MessageType.USER_QUERY_BASICINFO;
 		this.minionId = id;
 	}
+	
 
 	@Override
 	public void gatherInformation() {
@@ -31,8 +39,25 @@ public class UserQueryMinionBasicInfo extends Message implements Serializable, M
 		IP = "192.168.0.1";
 		//RAM = "45434M";
 		RAM = getRAMUsage();
-		hostName = "hostname";
+		hostName = get_Hostname();
 		//tag = "servidor de amazon"; este en realidad seria en otra funcion aparte, lo mete el master, no el minion.
+	}
+	
+	
+	public String get_Hostname() {
+		
+		String real_hostname = null;
+		
+		try {
+		      InetAddress inetAddress = InetAddress.getLocalHost();
+		      System.out.println("IP Address: "+inetAddress.getHostAddress());
+		      System.out.println("Hostname: "+inetAddress.getHostName());
+		      real_hostname = inetAddress.getHostName();
+		    }catch(UnknownHostException unknownHostException){
+		      unknownHostException.printStackTrace();
+		    }
+		
+		return real_hostname;
 	}
 	
 	public String getCPULoad() {

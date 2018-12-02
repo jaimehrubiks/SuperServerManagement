@@ -1,7 +1,12 @@
 package messages;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import db.DBConnector;
 
 public class UserQueryMinionList extends Message implements Serializable{
 	
@@ -15,6 +20,7 @@ public class UserQueryMinionList extends Message implements Serializable{
 		//minionList = new ArrayList();
 	}
 	
+	
 	public void setMinionList(ArrayList minionList) {
 		this.minionList = minionList;
 	}
@@ -25,7 +31,7 @@ public class UserQueryMinionList extends Message implements Serializable{
 	
 	@Override
 	public String toString() {
-		String s = String.format("%s\n",minionList.toString());
+		String s = String.format("%s\n",minionList==null? " " : minionList.toString());
 		return super.toString()+s;
 	}
 

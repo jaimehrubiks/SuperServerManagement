@@ -1,5 +1,6 @@
 package user;
 
+import db.DBConnector;
 import errors.ConnectionException;
 import messages.Message;
 import messages.MessageType;
@@ -42,6 +43,8 @@ public class User {
 			System.exit(1);
 		}
 		query1 = (UserQueryMinionList) message1;
+		System.out.println("> Logging message...");
+//		query1.toDatabase(new DBConnector());
 		System.out.println("Correct Answer received: ");
 		System.out.println(query1.toString());
 		return query1;
@@ -50,6 +53,8 @@ public class User {
 		newConnection();
 		System.out.println("Testing command: UserQueryMinionBasicInfo");
 		UserQueryMinionBasicInfo query2 = new UserQueryMinionBasicInfo(id);
+		System.out.println("> Logging message...");
+//		query2.toDatabase(new DBConnector());
 		socket.sendMessage(query2);
 		System.out.println("Message send. Waiting for response.");
 		Message message2 = socket.receiveMessage();

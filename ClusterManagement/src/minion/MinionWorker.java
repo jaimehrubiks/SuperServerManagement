@@ -1,5 +1,6 @@
 package minion;
 
+import db.DBConnector;
 import messages.Message;
 import messages.UserQueryMinionBasicInfo;
 
@@ -31,6 +32,8 @@ public class MinionWorker implements Runnable {
 				m.setMinionCode(ms.getMinionCode());
 				System.out.println("> Sending response back.");
 				socket.sendMessage(m);
+				//System.out.println("> Logging message.");
+				//m.toDatabase(new DBConnector());
 				break;
 			default:
 				System.out.println("Unknown message received.");

@@ -1,15 +1,11 @@
 package minion;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-
+import db.DBConnector;
 import errors.ConnectionException;
-import master.ClientThread;
 import messages.Message;
 import messages.MessageType;
 import messages.MinionLogin;
 import messages.MinionRegister;
-import minion.TCPMinionClient;
 
 public class Minion {
 
@@ -86,6 +82,7 @@ public class Minion {
 		MinionLogin login = new MinionLogin();
 		login.setMinionId(ms.getMinionId());
 		login.setMinionCode(ms.getMinionCode());
+//		login.toDatabase(new DBConnector());
 		System.out.println("Sending login message to server");
 		System.out.println(login.toString());
 		socket.sendMessage(login);
@@ -107,7 +104,7 @@ public class Minion {
 	}
 
 	private void register() {
-		MinionRegister message = new MinionRegister();
+		MinionRegister message = new MinionRegister(ms.getMinionId());
 		socket.sendMessage(message);
 		System.out.println("Sending register message to server.");
 		Message res = socket.receiveMessage();
