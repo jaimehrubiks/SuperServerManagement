@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import messages.CmdQuery;
 import messages.UserQueryMinionBasicInfo;
 
 public class DBModel {
@@ -35,19 +36,19 @@ public class DBModel {
 			}
 
 			con.close();
-			
+
 		} catch (SQLException se) {
 			se.printStackTrace();
 			System.out.println("> Error inserting records: " + se.getMessage());
 		}
-		
+
 		return minionId;
 	}
-	
+
 	public boolean minionLogin(int id, String code) {
-		
+
 		boolean result = false;
-		
+
 		try {
 			Connection con = dbcon.connect();
 			PreparedStatement ps = con.prepareStatement("SELECT (minionId) FROM " + this.databaseName + " WHERE minionID=(?) AND minionCode=(?)");
@@ -59,23 +60,23 @@ public class DBModel {
 			if (rs.next()) {
 				res = rs.getInt(1);
 			}
-			
+
 			if(res == id) {
 				result = true;
 			}
 
 			con.close();
-			
+
 		} catch (SQLException se) {
 			System.out.println("> Error inserting records: " + se.getMessage());
 		}
-		
+
 		return result;
 
 	}
-	
+
 	public ArrayList<Integer> getMinionList(){
-		
+
 		try {
 			Connection con = dbcon.connect();
 			String query = "SELECT minionId FROM " + this.databaseName;
@@ -91,11 +92,35 @@ public class DBModel {
 			System.out.println(e);
 			return new ArrayList<Integer>();
 		}
-		
+
 	}
-	
+
+	/*public boolean saveMinionProcessList(CmdQuery query) {
+		boolean ok=false;
+		try {
+			Connection con=dbcon.connect();
+			PreparedStatement ps=con.prepareStatement("INSERT INTO "+ this.databaseName+ "(minionId,messageType,date,message) VALUES(minionId=?,messageType=?,date=?,message=?)");
+			ps.setInt(1,query.getMinionId());
+			ps.setString(2,query.getMsgType().toString());
+			ps.setString(3, query.getDate().toString());
+			ps.setString(4, query.toString());
+			int result=ps.executeUpdate();			
+			con.close();
+
+			if(result > 0)
+				ok = true;
+
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+
+
+	}*/
 	public boolean saveMinionBasicInfo(UserQueryMinionBasicInfo msg) {
-		
+
 		boolean ok = false;
 
 		try {
@@ -110,25 +135,25 @@ public class DBModel {
 			ps.setInt(6, msg.getMinionId());
 			ps.setString(7, msg.getMinionCode());
 			int result = ps.executeUpdate();
-			
+
 			if(result > 0)
 				ok = true;
 
 			con.close();
-			
+
 		} catch (SQLException se) {
 			se.printStackTrace();
 			System.out.println("> Error inserting records: " + se.getMessage());
 		}
-		
+
 		return ok;
-		
+
 	}
-	
+
 	public boolean getMinionBasicInfo(UserQueryMinionBasicInfo msg) {
 
 		boolean result = false;
-		
+
 		try {
 			Connection con = dbcon.connect();
 			String sql ="SELECT ram, cpu, hostname, privateIp, publicIp, tag FROM " 
@@ -147,19 +172,19 @@ public class DBModel {
 				msg.setPublicIP(rs.getString(5));
 				msg.setTag(rs.getString(6));
 			}
-			
+
 			con.close();
-			
+
 		} catch (SQLException se) {
 			System.out.println("> Error querying basic info records: " + se.getMessage());
 			se.printStackTrace();
 		}
-		
+
 		return result;
 
 	}
-	
-	
+
+
 }
 
 //

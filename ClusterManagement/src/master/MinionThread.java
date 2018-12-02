@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import db.DBModel;
+import messages.CmdQuery;
 import messages.Message;
 import messages.MessageType;
 import messages.MinionLogin;
@@ -74,13 +75,14 @@ public class MinionThread implements Runnable {
 			MinionLogin message = (MinionLogin) m;
 			minionLogin(message);
 		}
+		
 		socket.closeConnection();
 		
-		// TODO: EN LOS DEMÁS, HAY QUE ELIMINAR EL MINION CODE ANTES DE DEVOLVER EL MENSAJE AL USER
+		// TODO: EN LOS DEMÃ�S, HAY QUE ELIMINAR EL MINION CODE ANTES DE DEVOLVER EL MENSAJE AL USER
 		
 	
 	}
-	
+
 	private void minionRegister(MinionRegister message) {
 		System.out.println("Minion register message received.");
 		System.out.println(message.toString());

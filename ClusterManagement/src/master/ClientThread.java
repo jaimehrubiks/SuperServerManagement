@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import db.DBModel;
+import messages.CmdQuery;
 import messages.Message;
 import messages.MessageType;
 import messages.UserQueryMinionBasicInfo;
@@ -73,6 +74,8 @@ public class ClientThread implements Runnable {
 		case USER_QUERY_BASICINFO:
 			queryMinionBasicInfo((UserQueryMinionBasicInfo) m);
 			break;
+		case MINION_PROCESS_LIST:
+			queryProcessList((CmdQuery)m);
 		default:
 			break;
 		}
@@ -95,6 +98,47 @@ public class ClientThread implements Runnable {
 		}
 	}
 
+	private void queryProcessList(CmdQuery m) {
+		System.out.println("A user has requested processList.");
+		MinionThread mt = null;
+		try {
+			TCPMinionListener minionTCP;
+			if (Master.connectedMinions.containsKey(m.getMinionId())) {
+				System.out.println("Minion is online.");
+				mt = Master.connectedMinions.get(m.getMinionId());
+				minionTCP = mt.getTCP();
+				System.out.println("Sending message to minion.");
+				System.out.println(m.getMsgType());
+				minionTCP.sendMessage(m);
+				System.out.println("Waiting for the minion's response.");
+				Message ans = minionTCP.receiveMessage();
+				if (ans.getMsgType() == MessageType.MINION_PROCESS_LIST) {
+					System.out.println("Message received from minion.");
+					m = (CmdQuery) ans;
+					System.out.println(m.toString());
+					socket.sendMessage(m);
+					/*boolean ok=db.saveMinionProcessList(m);
+					if (ok) {
+						System.out.println("Auth OK. Data saved to db.");
+
+					} else {
+						System.out.println("Auth not OK. Data not saved to db.");
+					}*/
+				} else {
+					return;
+				}
+			} else {
+				System.out.println("Minion is not online.");
+			}
+		} catch (Exception e) {
+			System.out.println("Minion no longer is connected.");
+			if(mt!=null)
+				mt.die();
+		}
+
+		//
+
+	}
 	private void queryMinionBasicInfo(UserQueryMinionBasicInfo m) {
 
 		System.out.println("A user has requested queryBasicMinionInfo.");
@@ -150,5 +194,5 @@ public class ClientThread implements Runnable {
 
 	}
 
-	
+
 }
