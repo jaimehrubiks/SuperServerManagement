@@ -1,5 +1,6 @@
 package messages;
 
-public class CmdType {
+public enum CmdType {
+	MINION_PROCESS_LIST
 
 }

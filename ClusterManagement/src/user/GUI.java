@@ -5,6 +5,8 @@ import java.awt.Button;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -12,12 +14,15 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import messages.CmdQuery;
 import messages.UserQueryMinionBasicInfo;
 
 public class GUI  extends JFrame implements ActionListener
@@ -30,10 +35,13 @@ public class GUI  extends JFrame implements ActionListener
 	private JTable table;
 	private JScrollPane scrollpane;
 	private static final String[] columnames= {"ID","Hostname","Tag","Public IP","IP","CPU","RAM","Online","Select minion"};
+	private static final String[] processColumns= {"Image name","PID","Session Name","Session#","Mem Usage"};
 	DefaultTableModel tableModel = new DefaultTableModel(columnames, 0);
+	DefaultTableModel processListTable = new DefaultTableModel(processColumns, 0);
 	private JButton ask_minion_list = new JButton("Ask for minion list");
 	private JButton ask_information=new JButton("Ask for information");
 	private JButton listing_and_ask_for_information=new JButton("Ask for minion list and fill the information");
+	private JButton listing_processes=new JButton("Ask for process list");
 	ArrayList<Integer>array;
 	User user=new User();
 	public GUI() 
@@ -52,6 +60,7 @@ public class GUI  extends JFrame implements ActionListener
 		ask_minion_list.addActionListener(this);
 		ask_information.addActionListener(this);
 		listing_and_ask_for_information.addActionListener(this);
+		listing_processes.addActionListener(this);
 		table=new JTable(tableModel);
 		table.setPreferredScrollableViewportSize(new Dimension(800, 300));
 		table.setFillsViewportHeight(true);
@@ -82,6 +91,13 @@ public class GUI  extends JFrame implements ActionListener
 		this.pack();
 		this.setResizable(false);
 		this.setVisible(true);
+		/*******************/
+		JPanel button_panel3=new JPanel();
+		button_panel3.add(listing_processes);
+		this.add(button_panel3,BorderLayout.CENTER);
+		this.pack();
+		this.setResizable(false);
+		this.setVisible(true);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -96,7 +112,10 @@ public class GUI  extends JFrame implements ActionListener
 			askMinonList();
 			DOUBLE_QUERY=true;
 			askForInformation();
-		}	
+		}
+		else if (e.getSource()==listing_processes) {
+			askForProcessList();
+		}
 		else {
 
 		}
@@ -113,6 +132,36 @@ public class GUI  extends JFrame implements ActionListener
 	}
 
 
+	public void askForProcessList() {		
+		int num_rows=table.getRowCount();
+		
+		ArrayList<CmdQuery> query2=new ArrayList<>();
+		Boolean checked;
+		array=new ArrayList<>();
+		ArrayList<Integer> array2=new ArrayList<>();
+		for (int i = 0; i < num_rows; i++) {//Checking if the check box is selected in each column
+			
+				checked=Boolean.valueOf(tableModel.getValueAt(i, 8).toString());
+				if(checked) {
+					array.add(Integer.parseInt(String.valueOf(table.getValueAt(i,0))));
+					array2.add(i);
+				}
+		}
+		for (int i = 0; i < array.size(); i++) {
+			query2.add(user.getProcessList(array.get(i)));//Here I receive the information of each minion and I storage it into the array
+		}
+		for (int i = 0; i < query2.size(); i++) {
+			JFrame jframe=new JFrame("Process List");
+			jframe.setVisible(true);
+			jframe.setSize(750,750);
+			JLabel label=new JLabel();
+			label.setText(query2.get(i).toString());
+			jframe.add(label);
+		}
+		
+
+		
+	}
 	public void askForInformation() {
 		int counter=0;
 		int num_rows=table.getRowCount();
@@ -145,7 +194,6 @@ public class GUI  extends JFrame implements ActionListener
 			counter++;
 		}	
 	}
-
 
 	public void deleteTable() {
 		int num_rows=table.getRowCount();

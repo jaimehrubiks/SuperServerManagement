@@ -1,5 +1,6 @@
 package messages;
 
-public class ExtraInfoType {
+public enum ExtraInfoType {
+	MINION_PROCESS_LIST
 
 }
