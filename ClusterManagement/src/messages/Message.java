@@ -16,6 +16,7 @@ public class Message implements Loggable, Serializable{
 	private String minionCode;
 
 	protected int minionId;
+	protected int userId;
 	protected MessageType msgType;
 	
 	public Message() {
@@ -24,9 +25,9 @@ public class Message implements Loggable, Serializable{
 	}
 	
 	@Override
-	public void toDatabase(DBConnector db) {
+	public void toDatabase(DBConnector db, String sender) {
 		
-		if(this.minionId != 0) {
+		if(sender == "minion") {
 			try {
 				
 				System.out.println("Connecting to DB to log a [Minion] message...");
@@ -37,7 +38,10 @@ public class Message implements Loggable, Serializable{
 				Connection con = db.connect();
 				String databaseName = "ssm_logs_minion";
 				PreparedStatement ps = con.prepareStatement("INSERT INTO " + databaseName + "(minionId, messageType, date, message) VALUES(?,?,?,?)");
-				ps.setInt(1, this.minionId);
+				if(this.minionId==0)
+					ps.setObject(1, null);
+				else
+					ps.setInt(1, this.minionId);
 				ps.setString(2, this.msgType.toString());
 				ps.setString(3, this.getDate().toString());
 				ps.setString(4, this.toString());
@@ -48,7 +52,7 @@ public class Message implements Loggable, Serializable{
 				System.out.println("Error logging message to database: " + e.getMessage());
 			}
 		}
-		else {
+		else if (sender == "user"){
 			try {
 				
 				System.out.println("Connecting to DB to log a [User] message...");
@@ -58,10 +62,14 @@ public class Message implements Loggable, Serializable{
 				
 				Connection con = db.connect();
 				String databaseName = "ssm_logs_user";
-				PreparedStatement ps = con.prepareStatement("INSERT INTO " + databaseName + " (messageType, date, message) VALUES(?,?,?)");
-				ps.setString(1, this.msgType.toString());
-				ps.setString(2, this.getDate().toString());
-				ps.setString(3, this.toString());
+				PreparedStatement ps = con.prepareStatement("INSERT INTO " + databaseName + " (userId, messageType, date, message) VALUES(?,?,?,?)");
+				if(this.userId==0)
+					ps.setObject(1, null);
+				else
+					ps.setInt(1, this.userId);
+				ps.setString(2, this.msgType.toString());
+				ps.setString(3, this.getDate().toString());
+				ps.setString(4, this.toString());
 				ps.executeUpdate();
 				con.close();
 			} catch (SQLException e) {
@@ -110,6 +118,6 @@ public class Message implements Loggable, Serializable{
 				date, msgType, minionId, minionCode);
 		return s;
 	}
-	
+
 	
 }

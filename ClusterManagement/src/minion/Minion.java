@@ -82,7 +82,7 @@ public class Minion {
 		MinionLogin login = new MinionLogin();
 		login.setMinionId(ms.getMinionId());
 		login.setMinionCode(ms.getMinionCode());
-		login.toDatabase(new DBConnector());
+//		login.toDatabase(new DBConnector());
 		System.out.println("Sending login message to server");
 		System.out.println(login.toString());
 		socket.sendMessage(login);

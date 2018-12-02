@@ -31,7 +31,7 @@ public class UserQueryMinionList extends Message implements Serializable{
 	
 	@Override
 	public String toString() {
-		String s = String.format("%s\n",minionList.toString());
+		String s = String.format("%s\n",minionList==null? " " : minionList.toString());
 		return super.toString()+s;
 	}
 

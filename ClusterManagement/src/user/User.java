@@ -44,7 +44,7 @@ public class User {
 		}
 		query1 = (UserQueryMinionList) message1;
 		System.out.println("> Logging message...");
-		query1.toDatabase(new DBConnector());
+//		query1.toDatabase(new DBConnector());
 		System.out.println("Correct Answer received: ");
 		System.out.println(query1.toString());
 		return query1;
@@ -54,7 +54,7 @@ public class User {
 		System.out.println("Testing command: UserQueryMinionBasicInfo");
 		UserQueryMinionBasicInfo query2 = new UserQueryMinionBasicInfo(id);
 		System.out.println("> Logging message...");
-		query2.toDatabase(new DBConnector());
+//		query2.toDatabase(new DBConnector());
 		socket.sendMessage(query2);
 		System.out.println("Message send. Waiting for response.");
 		Message message2 = socket.receiveMessage();
