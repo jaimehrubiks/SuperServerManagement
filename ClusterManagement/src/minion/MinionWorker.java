@@ -31,7 +31,12 @@ public class MinionWorker implements Runnable {
 				System.out.println(ms.getMinionCode());
 				m.setMinionCode(ms.getMinionCode());
 				System.out.println("> Sending response back.");
-				socket.sendMessage(m);
+				try {
+					socket.sendMessage(m);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				//System.out.println("> Logging message.");
 				//m.toDatabase(new DBConnector());
 				break;

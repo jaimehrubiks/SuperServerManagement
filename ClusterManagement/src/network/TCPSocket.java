@@ -71,13 +71,9 @@ public abstract class TCPSocket {
 		return m;
 	}
 	
-	public void sendMessage(Message m) {
-		try {
-			txBuffer.writeObject(m);
-			txBuffer.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void sendMessage(Message m) throws Exception {
+		txBuffer.writeObject(m);
+		txBuffer.flush();
 	}
 
 	public final void closeConnection() {

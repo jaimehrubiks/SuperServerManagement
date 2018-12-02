@@ -88,92 +88,67 @@ public class ClientThread implements Runnable {
 		m.setMinionList(db.getMinionList());
 		System.out.println("> Sending this message back:");
 		System.out.println(m.toString());
-		socket.sendMessage(m);
+		try {
+			socket.sendMessage(m);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void queryMinionBasicInfo(UserQueryMinionBasicInfo m) {
 
 		System.out.println("A user has requested queryBasicMinionInfo.");
 
-		TCPMinionListener minionTCP;
-		if (Master.connectedMinions.containsKey(m.getMinionId())) {
-			System.out.println("Minion is online.");
-			minionTCP = Master.connectedMinions.get(m.getMinionId()).getTCP();
-			System.out.println("Sending message to minion.");
-			minionTCP.sendMessage(m);
-			System.out.println("Waiting for the minion's response.");
-			Message ans = minionTCP.receiveMessage();
-			if (ans.getMsgType() == MessageType.USER_QUERY_BASICINFO) {
-				System.out.println("Message received from minion.");
-				m = (UserQueryMinionBasicInfo) ans;
-				System.out.println(m.toString());
-				m.setPublicIP(minionTCP.getPublicIp());
-				boolean result = db.saveMinionBasicInfo(m);
-				if (result) {
-					System.out.println("Auth OK. Data saved to db.");
-					m.setOnline(true);
+
+		MinionThread mt = null;
+		try {
+			TCPMinionListener minionTCP;
+			if (Master.connectedMinions.containsKey(m.getMinionId())) {
+				System.out.println("Minion is online.");
+				mt = Master.connectedMinions.get(m.getMinionId());
+				minionTCP = mt.getTCP();
+				System.out.println("Sending message to minion.");
+				minionTCP.sendMessage(m);
+				System.out.println("Waiting for the minion's response.");
+				Message ans = minionTCP.receiveMessage();
+				if (ans.getMsgType() == MessageType.USER_QUERY_BASICINFO) {
+					System.out.println("Message received from minion.");
+					m = (UserQueryMinionBasicInfo) ans;
+					System.out.println(m.toString());
+					m.setPublicIP(minionTCP.getPublicIp());
+					boolean result = db.saveMinionBasicInfo(m);
+					if (result) {
+						System.out.println("Auth OK. Data saved to db.");
+						m.setOnline(true);
+					} else {
+						System.out.println("Auth not OK. Data not saved to db.");
+						m.setOnline(false);
+					}
 				} else {
-					System.out.println("Auth not OK. Data not saved to db.");
-					m.setOnline(false);
+					return;
 				}
 			} else {
-				return;
-			}
-		}else {
-			System.out.println("Minion is not online.");
-			m.setOnline(false);
-		}
-		
-		// 
-		boolean exists = db.getMinionBasicInfo(m);
-		if(exists) {
-			socket.sendMessage(m);
-		}
-
-
-	}
-
-	private void queryMinionBasicInfo2(UserQueryMinionBasicInfo m) {
-		// Check if minion is connected
-		// > Check if it is in the HashMap
-		// > Try to connect
-		TCPMinionListener minionTCP;
-		if (Master.connectedMinions.containsKey(m.getMinionId())) {
-			System.out.println("Minion is online.");
-			minionTCP = Master.connectedMinions.get(m.getMinionId()).getTCP();
-		} else {
-			return;
-		} // Aqui no debería volver.
-
-		// If connected
-		// > Send message to the minion using its socket.
-		// > Specify bit to 'online'
-		System.out.println("Sending message to minion.");
-		minionTCP.sendMessage(m);
-		// Wait for the response
-		System.out.println("Waiting for the minion's response.");
-		Message ans = minionTCP.receiveMessage();
-		if (ans.getMsgType() == MessageType.USER_QUERY_BASICINFO) {
-			System.out.println("Message received from minion.");
-			m = (UserQueryMinionBasicInfo) ans;
-			System.out.println(m.toString());
-			boolean result = db.saveMinionBasicInfo(m);
-			if (result) {
-				System.out.println("Auth OK. Data saved to db.");
-				m.setOnline(true);
-				m.setPublicIP(minionTCP.getPublicIp());
-				System.out.println("Sending response back to the user.");
-			} else {
-				System.out.println("Auth not OK.");
+				System.out.println("Minion is not online.");
 				m.setOnline(false);
 			}
-			socket.sendMessage(m);
-		} else {
-			return;
+		} catch (Exception e) {
+			System.out.println("Minion no longer is connected.");
+			if(mt!=null)
+				mt.die();
+			m.setOnline(false);
 		}
 
-		// If not connected
-		// > Get backup info from database.
-		// > Specify bit to 'offline'
+		//
+		boolean exists = db.getMinionBasicInfo(m);
+		if (exists) {
+			try {
+				socket.sendMessage(m);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
+
+	
 }

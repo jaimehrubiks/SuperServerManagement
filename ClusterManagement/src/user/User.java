@@ -35,7 +35,12 @@ public class User {
 		// TEST 1: GET MINION LIST
 		System.out.println("Testing command: UserQueryMinionList");
 		UserQueryMinionList query1 = new UserQueryMinionList();
-		socket.sendMessage(query1);
+		try {
+			socket.sendMessage(query1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Message send. Waiting for response.");
 		Message message1 = socket.receiveMessage();
 		if(message1.getMsgType() != MessageType.USER_QUERY_MINIONLIST) {
@@ -55,7 +60,11 @@ public class User {
 		UserQueryMinionBasicInfo query2 = new UserQueryMinionBasicInfo(id);
 		System.out.println("> Logging message...");
 //		query2.toDatabase(new DBConnector());
-		socket.sendMessage(query2);
+		try {
+			socket.sendMessage(query2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("Message send. Waiting for response.");
 		Message message2 = socket.receiveMessage();
 		if(message2.getMsgType() != MessageType.USER_QUERY_BASICINFO) {
@@ -75,7 +84,11 @@ public class User {
 		// TEST 1: GET MINION LIST
 		System.out.println("Testing command: UserQueryMinionList");
 		UserQueryMinionList query1 = new UserQueryMinionList();
-		socket.sendMessage(query1);
+		try {
+			socket.sendMessage(query1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("Message send. Waiting for response.");
 		Message message1 = socket.receiveMessage();
 		if(message1.getMsgType() != MessageType.USER_QUERY_MINIONLIST) {
@@ -90,7 +103,11 @@ public class User {
 //		// TEST 2: GET BASIC INFO FROM LATEST MINION ON THE LIST
 		System.out.println("Testing command: UserQueryMinionBasicInfo");
 		UserQueryMinionBasicInfo query2 = new UserQueryMinionBasicInfo(query1.getMinionList().get(query1.getMinionList().size()-1));
-		socket.sendMessage(query2);
+		try {
+			socket.sendMessage(query2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("Message send. Waiting for response.");
 		Message message2 = socket.receiveMessage();
 		if(message2.getMsgType() != MessageType.USER_QUERY_BASICINFO) {

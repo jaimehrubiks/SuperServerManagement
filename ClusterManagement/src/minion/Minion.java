@@ -85,7 +85,10 @@ public class Minion {
 //		login.toDatabase(new DBConnector());
 		System.out.println("Sending login message to server");
 		System.out.println(login.toString());
-		socket.sendMessage(login);
+		try {
+			socket.sendMessage(login);
+		} catch (Exception e) {
+		}
 		System.out.println("Login message sent. Waiting for response.");
 		Message res = socket.receiveMessage();
 		System.out.println("> Got answer.");
@@ -105,7 +108,11 @@ public class Minion {
 
 	private void register() {
 		MinionRegister message = new MinionRegister(ms.getMinionId());
-		socket.sendMessage(message);
+		try {
+			socket.sendMessage(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("Sending register message to server.");
 		Message res = socket.receiveMessage();
 		System.out.println("> Got answer");
@@ -150,7 +157,12 @@ public class Minion {
 	public void Test() {
 		System.out.println("Running user in test mode");
 		Message m = new Message();
-		socket.sendMessage(m);
+		try {
+			socket.sendMessage(m);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
