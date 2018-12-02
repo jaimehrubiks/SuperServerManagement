@@ -21,6 +21,7 @@ public class MinionThread implements Runnable {
 	private DBModel db;
 	private int mode;
 	private boolean working = false;
+	private int minionId;
 
 	public MinionThread() {
 		this.mode = listener;
@@ -98,7 +99,11 @@ public class MinionThread implements Runnable {
 			System.out.println("Minion registration failed. Server error. Sending message with correct bit to false.");
 		}
 		// devolver el mensaje
-		socket.sendMessage(message);
+		try {
+			socket.sendMessage(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("Message Sent. Closing connection.");
 	}
 	
@@ -111,12 +116,21 @@ public class MinionThread implements Runnable {
 			System.out.println("Login is successful.");
 			Master.connectedMinions.put(message.getMinionId(), this);
 			System.out.println("Replying back.");
-			socket.sendMessage(message);
+			try {
+				socket.sendMessage(message);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			System.out.println("Message sent.");
+			this.minionId = message.getMinionId();
 			working();
 		}else {
 			System.out.println("Login unsuccessful.");
-			socket.sendMessage(message);
+			try {
+				socket.sendMessage(message);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -134,11 +148,18 @@ public class MinionThread implements Runnable {
 		}
 		// Alternatively, we could just empty this method, and delete this thread, as it is not
 		//  necessary for the minion (in that case we would need to change "this" by other object, in minionLogin method)
+		System.out.println("Minion thread dying for minionid: " + minionId);
 		
 	}
 	
 	public TCPMinionListener getTCP() {
 		return socket;
+	}
+	
+	public void die() {
+		System.out.println("Minion has died. Removing from list.");
+		working = false;
+		Master.connectedMinions.remove(minionId);
 	}
 	
 }
