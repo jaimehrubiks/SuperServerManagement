@@ -28,7 +28,7 @@ public class CmdQuery extends Message implements MinionGatherable{
 			      p = Runtime.getRuntime().exec("tasklist.exe");
 			}
 			else {
-				p = Runtime.getRuntime().exec("ps -aux");
+				p = Runtime.getRuntime().exec("ps aux");
 			}
 			BufferedReader input=new BufferedReader(new InputStreamReader(p.getInputStream()));
 			while((line=input.readLine()) !=null) {
