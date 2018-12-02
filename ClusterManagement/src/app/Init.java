@@ -3,7 +3,6 @@ package app;
 import master.Master;
 import minion.Minion;
 import user.GUI;
-import user.User;
 
 public class Init {
 

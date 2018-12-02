@@ -28,7 +28,7 @@ public class ClientThread implements Runnable {
 	public ClientThread(Socket accept) {
 		this.mode = worker;
 		socket = new TCPClientListener(accept);
-		db = new DBModel("minions");
+		db = new DBModel("ssm_minions");
 	}
 
 	@Override

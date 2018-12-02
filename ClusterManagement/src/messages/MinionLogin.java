@@ -1,6 +1,11 @@
 package messages;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import db.DBConnector;
 
 public class MinionLogin extends Message implements Serializable {
 	
@@ -14,6 +19,7 @@ public class MinionLogin extends Message implements Serializable {
 		this.ok = false;
 	}
 
+	
 	/**
 	 * @return the ok
 	 */
