@@ -76,6 +76,7 @@ public class ClientThread implements Runnable {
 			break;
 		case MINION_PROCESS_LIST:
 			queryProcessList((CmdQuery)m);
+			break;
 		default:
 			break;
 		}
