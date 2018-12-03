@@ -44,6 +44,7 @@ public class GUI  extends JFrame implements ActionListener
 	private JButton listing_processes=new JButton("Ask for process list");
 	ArrayList<Integer>array;
 	User user=new User();
+	
 	public GUI() 
 	{
 

@@ -3,6 +3,7 @@ package app;
 import master.Master;
 import minion.Minion;
 import user.GUI;
+import user.loginGUI;
 
 public class Init {
 
@@ -20,7 +21,8 @@ public class Init {
 		switch(mode) {
 			case Init.USER:
 				System.out.println("[Init] Running in USER mode");
-				new GUI();
+				new loginGUI();
+				//new GUI();
 				break;
 			case MASTER:
 				System.out.println("[Init] Running in MASTER mode.");
