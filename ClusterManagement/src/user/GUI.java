@@ -44,10 +44,13 @@ public class GUI  extends JFrame implements ActionListener
 	private JButton listing_processes=new JButton("Ask for process list");
 	ArrayList<Integer>array;
 	User user=new User();
+	private boolean isAdmin;
 	
-	public GUI() 
+	public GUI(boolean isAdmin) 
 	{
-
+		
+		this.isAdmin = isAdmin;
+		System.out.println("User has admin status? " + this.isAdmin);
 		Container pane=this.getContentPane();
 		pane.setLayout(new BoxLayout(pane,BoxLayout.X_AXIS));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

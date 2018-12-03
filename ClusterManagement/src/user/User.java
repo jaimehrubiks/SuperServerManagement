@@ -6,6 +6,7 @@ import messages.CmdQuery;
 import messages.CmdType;
 import messages.Message;
 import messages.MessageType;
+import messages.UserLogin;
 import messages.UserQueryMinionBasicInfo;
 import messages.UserQueryMinionList;
 
@@ -99,6 +100,30 @@ public class User {
 		return query2;
 
 	}
+	
+	public UserLogin checkUserLogin(UserLogin user) {
+		
+		newConnection();
+		System.out.println("User Login");
+		try {
+			socket.sendMessage(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Message message = socket.receiveMessage();
+		if(message.getMsgType() != MessageType.USER_LOGIN) {
+			System.out.println("Error receiving message");
+			System.exit(1);
+		}
+		user = (UserLogin) message;
+		System.out.println("Correct answer received: ");
+		System.out.println(user.toString());
+		return user;
+		
+	}
+	
 	public void Test() { // TEST FUNCTION. ONLY FOR TESTING.
 		System.out.println("Running user in test mode");
 

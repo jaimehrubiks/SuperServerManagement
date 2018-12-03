@@ -1,6 +1,7 @@
 package user;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -16,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import db.DBConnector;
+import messages.UserLogin;
 
 public class loginGUI extends JFrame{
 
@@ -28,8 +30,9 @@ public class loginGUI extends JFrame{
     private JPasswordField password;
     private JLabel output;
     private final int WINDOW_WIDTH = 310;  // Window width 
-    private final int WINDOW_HEIGHT = 160; // Window height
-
+    private final int WINDOW_HEIGHT = 180; // Window height
+    private User userobj;
+    private UserLogin response;
 	   /**
 	      Constructor
 	   */
@@ -53,6 +56,7 @@ public class loginGUI extends JFrame{
 
 	      // Display the window.
 	      setVisible(true);
+	      setResizable(false);
 	   }
 
 	   /**
@@ -72,6 +76,8 @@ public class loginGUI extends JFrame{
 	      
 	      loginButton.addActionListener(new LoginHandler());
 	      
+	      
+	      output = new JLabel("");
 	      // Create a JPanel object and let the panel
 	      // field reference it.
 	      panel = new JPanel();
@@ -83,6 +89,7 @@ public class loginGUI extends JFrame{
 	      panel.add(passLabel);
 	      panel.add(password);
 	      panel.add(loginButton);
+	      panel.add(output);
 	   }
 
 	private class LoginHandler implements ActionListener {
@@ -96,7 +103,24 @@ public class loginGUI extends JFrame{
 			
 			System.out.println("Username: " + username + " and password: " + pass);
 			
-			DBConnector db = new DBConnector();
+			userobj = new User();
+			
+			response = userobj.checkUserLogin(new UserLogin(username, pass));
+			
+			if(response.isOk()) {
+				System.out.println("Authentication success.");
+				new GUI(response.isAdmin());
+				setVisible(false);
+			}
+			else {
+				System.out.println("Authentication failed [GUI].");
+				output.setText("Authentication failed. Please try again.");
+				output.setForeground(Color.RED);
+			}
+			
+			/*
+			 * DBConnector db = new DBConnector();
+			 
 			try {
 				Connection con = db.connect();
 				String tableName = "ssm_users";
@@ -123,7 +147,7 @@ public class loginGUI extends JFrame{
 				e1.printStackTrace();
 			}
 			
-			
+			*/
 			
 			
 		}

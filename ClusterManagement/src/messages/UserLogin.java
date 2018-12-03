@@ -9,6 +9,7 @@ public class UserLogin extends Message {
 	private String username;
 	private String password;
 	private boolean isOk;
+	private boolean isAdmin;
 
 	public UserLogin(String user, String pass) {
 		
@@ -42,6 +43,18 @@ public class UserLogin extends Message {
 		this.isOk = isOk;
 	}
 	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
 	
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
+	public String toString() {
+		String response = "Login Message\n-------\nDate: " + this.getDate() + "\nMessage Type: " + this.getMsgType() + "\nUser Id: " + this.getUserId() + "\nLogin Status: " + this.isOk() + "\nAdmin Status" + this.isAdmin();
+		return response;
+		
+	}
 	
 }

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import messages.CmdQuery;
+import messages.UserLogin;
 import messages.UserQueryMinionBasicInfo;
 
 public class DBModel {
@@ -182,6 +183,37 @@ public class DBModel {
 
 		return result;
 
+	}
+	
+	public UserLogin checkUserLogin(UserLogin user) {
+		DBConnector db = new DBConnector();
+		 
+		try {
+			
+			Connection con = db.connect();
+			String tableName = "ssm_users";
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM " + tableName + " WHERE username=(?) AND password=(?)");
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				System.out.println("Authentication success.");
+				user.setAdmin(rs.getBoolean("admin"));
+				user.setOk(true);
+			}
+			else {
+				System.out.println("Authentication failed.");
+				user.setOk(false);
+			}
+			
+			con.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return user;
 	}
 
 
