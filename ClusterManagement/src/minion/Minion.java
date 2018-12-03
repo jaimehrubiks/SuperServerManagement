@@ -12,7 +12,7 @@ public class Minion {
 	private TCPMinionClient socket;
 	private MinionStorage ms;
 
-	private int retryTime = 5000;
+	private int retryTime = 10000;
 
 	private MinionInfo.Status status = MinionInfo.Status.DISCONNECTED;
 
@@ -37,11 +37,18 @@ public class Minion {
 		// spawn thread with the received message;
 		boolean listening = true;
 
-		while (listening) {
-			Thread t = new Thread(new MinionWorker(socket.receiveMessage(), socket, ms));
-			System.out.println("* Message Received. Spawning thread to process it.");
-			t.start();
+		try {
+			while (listening) {
+				Thread t = new Thread(new MinionWorker(socket.receiveMessageEx(), socket, ms));
+				System.out.println("* Message Received. Spawning thread to process it.");
+				t.start();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			retry();
+			
 		}
+		
 
 	}
 
@@ -54,7 +61,6 @@ public class Minion {
 			return;
 		}
 		System.out.println("Minion connected to server.");
-
 		ms.readSettings();
 		if (!ms.isRegistered()) {
 			System.out.println("Minion storage file does not exist (or is invalid). Trying to register.");
@@ -136,7 +142,7 @@ public class Minion {
 			Thread.sleep(retryTime);
 			start();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println("> Connection has failed in 10 seconds");
 		}
 	}
 
@@ -145,7 +151,7 @@ public class Minion {
 			socket = new TCPMinionClient("localhost", 8001);
 			status = MinionInfo.Status.CONNECTED;
 		} catch (ConnectionException e) {
-			e.printStackTrace();
+			System.out.println("> Connection has failed in 10 seconds");
 		}
 	}
 
