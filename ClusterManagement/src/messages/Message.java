@@ -95,6 +95,14 @@ public class Message implements Loggable, Serializable{
 	public void setMinionId(int minionId) {
 		this.minionId = minionId;
 	}
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getMinionCode() {
 		return minionCode;
