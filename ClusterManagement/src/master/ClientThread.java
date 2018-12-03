@@ -8,6 +8,7 @@ import db.DBModel;
 import messages.CmdQuery;
 import messages.Message;
 import messages.MessageType;
+import messages.UserLogin;
 import messages.UserQueryMinionBasicInfo;
 import messages.UserQueryMinionList;
 
@@ -76,6 +77,10 @@ public class ClientThread implements Runnable {
 			break;
 		case MINION_PROCESS_LIST:
 			queryProcessList((CmdQuery)m);
+			break;
+		case USER_LOGIN:
+			userLogin((UserLogin)m);
+			break;
 		default:
 			break;
 		}
@@ -84,6 +89,37 @@ public class ClientThread implements Runnable {
 		System.out.println("User disconnects.");
 		socket.closeConnection();
 
+	}
+	
+	private void userLogin(UserLogin m) {
+		
+		System.out.println("> User trying to log in");
+		UserLogin user = db.checkUserLogin(m);
+		
+		if(user.isOk()) {
+			
+			System.out.println("User successfully logged in");
+			System.out.println("Sending login OK message to client...");
+			System.out.println(user.toString());
+			try {
+				socket.sendMessage(user);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else {
+			System.out.println("Sending login NOK message to client...");
+			System.out.println(user.toString());
+			try {
+				socket.sendMessage(user);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	private void queryMinionList(UserQueryMinionList m) {
