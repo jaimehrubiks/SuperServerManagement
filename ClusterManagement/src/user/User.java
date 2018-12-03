@@ -59,9 +59,7 @@ public class User {
 	public CmdQuery getProcessList(int id) {
 		newConnection();
 		System.out.println("Testing command: ProcessList");
-		System.out.println(id);
 		CmdQuery query=new CmdQuery(CmdType.MINION_PROCESS_LIST,MessageType.MINION_PROCESS_LIST,id);
-		System.out.println(query.getMinionId());
 		try {
 			socket.sendMessage(query);
 		} catch (Exception e) {

@@ -24,7 +24,6 @@ public class CmdQuery extends Message implements MinionGatherable{
 		
 		try {
 			if(system.indexOf("win")>=0) {
-				System.out.println("Windows");
 			      p = Runtime.getRuntime().exec("tasklist.exe");
 			}
 			else {

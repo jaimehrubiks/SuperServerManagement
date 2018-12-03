@@ -151,7 +151,8 @@ public class GUI  extends JFrame implements ActionListener
 			query2.add(user.getProcessList(array.get(i)));//Here I receive the information of each minion and I storage it into the array
 		}
 		for (int i = 0; i < query2.size(); i++) {
-			JFrame jframe=new JFrame("Process List");
+			JFrame jframe=new JFrame("Process List of minion "+query2.get(i).getMinionId());
+			jframe.setTitle("Process List of minion "+query2.get(i).getMinionId());
 			jframe.setVisible(true);
 			jframe.setSize(750,750);
 			JLabel label=new JLabel();
