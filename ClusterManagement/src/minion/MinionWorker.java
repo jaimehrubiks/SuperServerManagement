@@ -24,7 +24,6 @@ public class MinionWorker implements Runnable {
 	public void run() {
 
 		System.out.println("A message has been received.");
-
 		switch(msg.getMsgType()) {
 		case USER_QUERY_BASICINFO:
 			UserQueryMinionBasicInfo m = (UserQueryMinionBasicInfo) msg;
