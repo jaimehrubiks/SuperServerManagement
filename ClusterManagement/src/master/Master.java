@@ -1,16 +1,16 @@
 package master;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Master {
 
 	//private TCPListener tcplistener;
 	MasterOptions mo;
 	
-	public static HashMap<Integer, MinionThread> connectedMinions;
+	public static ConcurrentHashMap<Integer, MinionThread> connectedMinions;
 
 	public Master() {
-		connectedMinions = new HashMap<>();
+		connectedMinions = new ConcurrentHashMap<>();
 		launchClientThread();
 		launchMinionThread();
 	}
