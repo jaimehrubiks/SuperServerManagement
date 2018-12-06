@@ -160,7 +160,7 @@ public class GUI  extends JFrame implements ActionListener
 			jframe.setVisible(true);
 			jframe.setSize(750,750);
 			JLabel label=new JLabel();
-			label.setText(query2.get(i).toString());
+			label.setText("<html>"+query2.get(i).toString().replace("\n", "<br>")+"</html>");
 			jframe.add(label);
 		}
 		
