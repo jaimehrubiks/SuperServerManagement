@@ -114,9 +114,19 @@ public class ClientThread implements Runnable {
 		
 	}
 	
+	
 	private void adminQueryUserLogs(AdminQueryUserLogs m) {
 		
+		System.out.println("Admin asking for user logs...");
+		AdminQueryUserLogs response = db.getUserLogs(m);
 		
+		System.out.println("Query received from DB. Sending response to client...");
+		try {
+			socket.sendMessage(response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
