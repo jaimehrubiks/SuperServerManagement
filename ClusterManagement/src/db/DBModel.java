@@ -199,6 +199,7 @@ public class DBModel {
 			
 			if(rs.next()) {
 				System.out.println("Authentication success.");
+				user.setUserId(rs.getInt("userId"));
 				user.setAdmin(rs.getBoolean("admin"));
 				user.setOk(true);
 			}

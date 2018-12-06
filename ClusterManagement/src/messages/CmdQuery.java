@@ -48,11 +48,11 @@ public class CmdQuery extends Message implements MinionGatherable{
 	}
 	@Override
 	public String toString() {
-		String message = "<html>";
+		String message="";
 		for (String string : processList) {
-			message=message+string+"<br>";
+			message=message+string+"\n";
 		}
-		message=message+"</html>";
+		
 		return message;
 		
 	}
