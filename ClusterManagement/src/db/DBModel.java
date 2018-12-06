@@ -1,5 +1,8 @@
 package db;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -184,7 +187,33 @@ public class DBModel {
 		return result;
 
 	}
+	public String hashCreator(String password) {
+		try { 
+            // getInstance() method is called with algorithm SHA-1 
+            MessageDigest md = MessageDigest.getInstance("SHA-512"); 
+  
+            // digest() method is called 
+            // to calculate message digest of the input string 
+            // returned as array of byte 
+            byte[] messageDigest = md.digest(password.getBytes()); 
+  
+            // Convert byte array into signum representation 
+            BigInteger no = new BigInteger(1, messageDigest); 
+  
+            // Convert message digest into hex value 
+            String hashtext = no.toString(16); 
+  
+            // Add preceding 0s to make it 32 bit 
+            while (hashtext.length() < 32) { 
+                hashtext = "0" + hashtext; 
+            } 
+            // return the HashText 
+            return hashtext; 
+		}catch (NoSuchAlgorithmException e) { 
+            throw new RuntimeException(e); 
+        } 
 	
+	}
 	public UserLogin checkUserLogin(UserLogin user) {
 		DBConnector db = new DBConnector();
 		 
@@ -192,9 +221,10 @@ public class DBModel {
 			
 			Connection con = db.connect();
 			String tableName = "ssm_users";
+			String password=hashCreator(user.getPassword());
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM " + tableName + " WHERE username=(?) AND password=(?)");
 			ps.setString(1, user.getUsername());
-			ps.setString(2, user.getPassword());
+			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
