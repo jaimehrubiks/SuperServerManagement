@@ -1,15 +1,23 @@
 package messages;
 
-public class AdminQueryUserLogs {
+import java.util.List;
 
+public class AdminQueryUserLogs extends Message{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int logId;
 	private int userId;
 	private String messageType;
 	private String timestamp;
 	private String message;
-	private AdminQueryUserLogs[] array;
+	private List<AdminQueryUserLogs> array;
 	
 	public AdminQueryUserLogs() {
+		
+		this.msgType = MessageType.ADMIN_QUERY_USER_LOGS;
 		
 	}
 
@@ -28,6 +36,7 @@ public class AdminQueryUserLogs {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 
 	public String getMessageType() {
 		return messageType;
@@ -53,13 +62,14 @@ public class AdminQueryUserLogs {
 		this.message = message;
 	}
 
-	public AdminQueryUserLogs[] getArray() {
+	public List<AdminQueryUserLogs> getArray() {
 		return array;
 	}
 
-	public void setArray(AdminQueryUserLogs[] array) {
+	public void setArray(List<AdminQueryUserLogs> array) {
 		this.array = array;
 	}
-	
+
+
 	
 }

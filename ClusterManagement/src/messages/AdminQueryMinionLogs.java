@@ -1,5 +1,7 @@
 package messages;
 
+import java.util.List;
+
 public class AdminQueryMinionLogs extends Message{
 	
 	/**
@@ -8,14 +10,14 @@ public class AdminQueryMinionLogs extends Message{
 	private static final long serialVersionUID = 1L;
 	private int logId;
 	private int minionId;
-	private String msgType;
+	private String messageType;
 	private String timestamp;
 	private String message;
-	private AdminQueryMinionLogs[] array;
+	private List<AdminQueryMinionLogs> array;
 	
 	public AdminQueryMinionLogs() {
 		
-		
+		this.msgType = MessageType.ADMIN_QUERY_MINION_LOGS;
 		
 	}
 
@@ -35,14 +37,14 @@ public class AdminQueryMinionLogs extends Message{
 		this.minionId = minionId;
 	}
 
+
 	public String getMessageType() {
-		return msgType;
+		return messageType;
 	}
 
-	public void setMessageType(String msgType) {
-		this.msgType = msgType;
+	public void setMessageType(String messageType) {
+		this.messageType = messageType;
 	}
-
 
 	public String getTimestamp() {
 		return timestamp;
@@ -60,13 +62,15 @@ public class AdminQueryMinionLogs extends Message{
 		this.message = message;
 	}
 
-	public AdminQueryMinionLogs[] getArray() {
+	public List<AdminQueryMinionLogs> getArray() {
 		return array;
 	}
 
-	public void setArray(AdminQueryMinionLogs[] array) {
+	public void setArray(List<AdminQueryMinionLogs> array) {
 		this.array = array;
 	}
+
+
 	
 	
 	

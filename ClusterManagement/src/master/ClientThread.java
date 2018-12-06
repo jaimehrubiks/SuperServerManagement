@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import db.DBModel;
+import messages.AdminQueryMinionLogs;
+import messages.AdminQueryUserLogs;
 import messages.CmdQuery;
 import messages.Message;
 import messages.MessageType;
@@ -81,6 +83,12 @@ public class ClientThread implements Runnable {
 		case USER_LOGIN:
 			userLogin((UserLogin)m);
 			break;
+		case ADMIN_QUERY_MINION_LOGS:
+			adminQueryMinionLogs((AdminQueryMinionLogs)m);
+			break;
+		case ADMIN_QUERY_USER_LOGS:
+			adminQueryUserLogs((AdminQueryUserLogs)m);
+			break;
 		default:
 			break;
 		}
@@ -89,6 +97,27 @@ public class ClientThread implements Runnable {
 		System.out.println("User disconnects.");
 		socket.closeConnection();
 
+	}
+	
+	private void adminQueryMinionLogs(AdminQueryMinionLogs m) {
+		
+		System.out.println("Admin asking for minion logs...");
+		AdminQueryMinionLogs response = db.getMinionLogs(m);
+		
+		System.out.println("Query received from DB. Sending response to client...");
+		try {
+			socket.sendMessage(response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void adminQueryUserLogs(AdminQueryUserLogs m) {
+		
+		
+		
 	}
 	
 	private void userLogin(UserLogin m) {

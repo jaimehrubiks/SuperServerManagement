@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
+import messages.AdminQueryMinionLogs;
 import messages.CmdQuery;
 import messages.UserLogin;
 import messages.UserQueryMinionBasicInfo;
@@ -74,6 +76,39 @@ public class DBModel {
 
 		return result;
 
+	}
+	
+	public AdminQueryMinionLogs getMinionLogs(AdminQueryMinionLogs m) {
+		
+		try {
+			Connection con = dbcon.connect();
+			String tableName = "ssm_logs_minions";
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM " + tableName);
+			ResultSet rs = ps.executeQuery();
+			
+			List<AdminQueryMinionLogs> array = new ArrayList<AdminQueryMinionLogs>();
+			while(rs.next()) {
+				
+				AdminQueryMinionLogs temp = new AdminQueryMinionLogs();
+				temp.setLogId(rs.getInt("logId"));
+				temp.setTimestamp(rs.getString("date"));
+				temp.setMessageType(rs.getString("messageType"));
+				temp.setMessage(rs.getString("message"));
+				array.add(temp);
+				
+			}
+			
+			m.setArray(array);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		return m;
+		
+		
 	}
 
 	public ArrayList<Integer> getMinionList(){
