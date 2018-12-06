@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import db.DBConnector;
-import db.DBModel;
 
 public class Message implements Loggable, Serializable{
 	
