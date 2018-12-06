@@ -9,7 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
+import messages.AdminQueryMinionLogs;
+import messages.AdminQueryUserLogs;
 import messages.CmdQuery;
 import messages.UserLogin;
 import messages.UserQueryMinionBasicInfo;
@@ -78,7 +81,75 @@ public class DBModel {
 		return result;
 
 	}
+	
+	public AdminQueryMinionLogs getMinionLogs(AdminQueryMinionLogs m) {
+		
+		try {
+			Connection con = dbcon.connect();
+			String tableName = "ssm_logs_minion";
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM " + tableName);
+			ResultSet rs = ps.executeQuery();
+			
+			List<AdminQueryMinionLogs> array = new ArrayList<AdminQueryMinionLogs>();
+			while(rs.next()) {
+				
+				AdminQueryMinionLogs temp = new AdminQueryMinionLogs();
+				temp.setLogId(rs.getInt("logId"));
+				temp.setTimestamp(rs.getString("date"));
+				temp.setMessageType(rs.getString("messageType"));
+				temp.setMessage(rs.getString("message"));
+				temp.setMinionId(rs.getInt("minionId"));
+				array.add(temp);
+				
+			}
+			
+			m.setArray(array);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
+		return m;
+		
+		
+	}
+
+	public AdminQueryUserLogs getUserLogs(AdminQueryUserLogs m) {
+		
+		try {
+			Connection con = dbcon.connect();
+			String tableName = "ssm_logs_user";
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM " + tableName);
+			ResultSet rs = ps.executeQuery();
+			
+			List<AdminQueryUserLogs> array = new ArrayList<AdminQueryUserLogs>();
+			while(rs.next()) {
+				
+				AdminQueryUserLogs temp = new AdminQueryUserLogs();
+				temp.setLogId(rs.getInt("logId"));
+				temp.setTimestamp(rs.getString("date"));
+				temp.setMessageType(rs.getString("messageType"));
+				temp.setMessage(rs.getString("message"));
+				temp.setUserId(rs.getInt("userId"));
+				array.add(temp);
+				
+			}
+			
+			m.setArray(array);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		return m;
+		
+		
+	}
+	
 	public ArrayList<Integer> getMinionList(){
 
 		try {
