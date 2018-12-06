@@ -69,6 +69,13 @@ public class AdminQueryMinionLogs extends Message{
 	public void setArray(List<AdminQueryMinionLogs> array) {
 		this.array = array;
 	}
+	
+	@Override
+	public String toString() {
+		String s = "Has Array: " + (this.getArray()==null? "no" : "yes, of size: "+this.getArray().size());
+		return super.toString() + s + String.format("\nLogId: %d\nMinionId: %d\nMessage Type: %s\nTimeStamp: %s\nMessage: %s\n", 
+				logId, minionId, messageType, timestamp, message);
+	}
 
 
 	
